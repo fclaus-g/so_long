@@ -3,47 +3,57 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: fernandoclaus <fernandoclaus@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 11:13:04 by fclaus-g          #+#    #+#              #
-#    Updated: 2023/05/14 11:46:37 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/05/30 18:03:09 by fernandocla      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME	= so_long
 
-CC = gcc
+#DIRECTORIOS
+LIBMLX	= ./MLX42
+LIBFT	= ./lib/libft
+LIBPF	= ./lib/ft_printf
+LIBGNL	= ./lib/get_next_line
 
-CFLAGS = -Wall -Wextra -Werror
+#COMPILADOR
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast 
+HEADERS	= -I ./include -I $(LIBMLX)/include -I $(LIBFT) -I $(LIBGNL) -I $(LIBPF)#esto es para que busque los .h en la carpeta include
+LIBS	= $(LIBMLX)/build/libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
 
-MLX_LIB = MLX42/libmlx42.a
+SRCS	= $(shell find ./src -iname "*.c")
+OBJS	= ${SRCS:.c=.o}
 
-MLX_FLAGS = -L MLX42 -lmlx -framework OpenGL -framework AppKit
+all: libmlx libft libgnl libpf $(NAME)
 
-LIBFT_LIB = libft/libft.a
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
+libft:
+	@make -C ${LIBFT}
+libgnl :
+	@make -C ${LIBGNL}
+libpf :
+	@make -C ${LIBPF}
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
-C_FILES = 
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o $(NAME)
+$(OBJ) : $(SRC)
+	$(CC) $(CFLAGS) $(OPTION) $(SRC)
 
-O_FILES = $(C_FILES:.c=.o)
+debug:
+		@gcc -Wall -Wextra -Werror -g ./src/*.c $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a \
+		$(LIBS)
+		@echo "\033[0;32mArchivo debug generado"
+clean:
+	@rm -f $(OBJS)
 
-all : subsystem $(NAME)
+fclean: clean
+	@rm -f $(NAME)
 
-$(NAME) : $(O_FILES)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(O_FILES) $(MLX_LIB) -o $(NAME)
+re: clean all
 
-%.o : %.c
-	$(CC) $(CFLAGS) -lglfw -L /opt/homebrew/Cellar/glfw/3.3.6/lib/  -c $< -o $@
-
-subsystem :
-	$(MAKE) -C MLX42
-	$(MAKE) -C libft
-
-clean :
-	rm -f $(O_FILES)
-
-fclean : clean
-	rm -f $(NAME)
-
-re : fclean all
-
-.PHONY : all clean fclean re
+.PHONY: all, clean, fclean, re, libmlx
