@@ -6,7 +6,7 @@
 /*   By: fernandoclaus <fernandoclaus@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:11:34 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/05/30 20:06:40 by fernandocla      ###   ########.fr       */
+/*   Updated: 2023/06/06 17:21:32 by fernandocla      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 typedef struct s_box
 {
 	char **map;//matriz del mapa
-	int map_h;//altura del mapa
-	int map_w;//anchura del mapa
+	int alto;//altura del mapa
+	int ancho;//anchura del mapa
 	int coins;//contador de coleccionables
 	int movs;//contador de movimientos
 	int exit;//contador de salidas
-	int p_pos;//posicion x del jugador
+	int p_pos;//num de entradas
+	int	x_pos;
+	int y_pos;
 }		t_box;
 
 typedef struct s_img
@@ -47,9 +49,11 @@ typedef struct s_img
 //FUNCIONES
 //-- check_args && check map
 //checkin.c
-int	checkin(int ac, char *str);
-size_t	ft_mtrlen(char **matriz);
-
+int	checkin_arg(int ac, char *str);
+int	ft_mtrlen(char **matriz);
+int ft_checkforma(t_box *box);
+int ft_mtrlen(char **matriz);
+void ft_checkmap(t_box *box);
 //so_long.c
 void	ft_readsave_map(char *str, t_box *box);
 void	printmap(char **map);

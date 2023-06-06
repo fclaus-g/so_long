@@ -6,7 +6,7 @@
 /*   By: fernandoclaus <fernandoclaus@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/05/30 20:21:18 by fernandocla      ###   ########.fr       */
+/*   Updated: 2023/06/06 18:26:59 by fernandocla      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,25 @@ void	ft_readsave_map(char *str, t_box *box)
 void	initbox(t_box *box)
 {
 	box->map = NULL;
-	box->map_h = 0;
-	box->map_w = 0;
+	box->ancho = 0;
+	box->alto = 0;
 	box->coins = 0;
 	box->movs = 0;
 	box->exit = 0;
 	box->p_pos = 0;
+	box->x_pos = 0;
+	box->y_pos = 0;
 }
 
 int	main(int ac, char **av)
 {
 	t_box	box;
-	if (checkin(ac, av[1]))
+	if (checkin_arg(ac, av[1]))
 		return (-1);
 	initbox(&box);
 	ft_readsave_map(av[1], &box);
 	ft_checkmap(&box);
+	ft_start_game(&box);
 	//mlx_loop_hook(mlx, ft_hook, mlx);
 	return (0);
 }
@@ -84,11 +87,11 @@ int	main(int ac, char **av)
 -Pulsar la tecla ESC debe cerrar la ventana y cerrar el programa limpiamente.
 -Hacer clic en la cruz roja de la ventana debe cerrar la ventana y terminar el programa limpiamente.
 -El mapa estará construido de 3 componentes: paredes, objetos y espacio abierto.
--El mapa estará compuesto de solo 5 caracteres: 0 para un espacio vacío, 1 para un muro, C para un 
+XXX-El mapa estará compuesto de solo 5 caracteres: 0 para un espacio vacío, 1 para un muro, C para un 
 coleccionable, E para salir del mapa y P para la posición inicial del jugador.
--El mapa debe tener una salida, al menos un objeto y una posición inicial.
--El mapa debe ser rectangular.
--El mapa deberá estar cerrado/rodeado de muros, en caso contrario el programa deberá devolver un error.
+XXX-El mapa debe tener una salida, al menos un objeto y una posición inicial.
+XXX-El mapa debe ser rectangular.
+XXX-El mapa deberá estar cerrado/rodeado de muros, en caso contrario el programa deberá devolver un error.
 -Tienes que comprobar si hay un camino válido en el mapa.
 -En caso de fallos de configuración de cualquier tipo encontrados en el archivo, el programa debe
  terminar correctamente y devolver “Error\n” seguido de un mensaje explícito de tu elección.
