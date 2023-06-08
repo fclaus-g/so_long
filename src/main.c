@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/07 11:53:38 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:31:39 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,44 @@
 #include "../inc/so_long.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
+/*con key_control añadimos funcionalidades a las teclas como cerrar la ventana si
+presionamos escape o mover nuestro player si presionas una u otra tecla*/
+void key_control(t_box *box)
+{
+	if (mlx_is_key_down(box->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(box->mlx);
+	}
+	if (mlx_is_key_down(box->mlx, MLX_KEY_W))
+	{
+		box->y_pos--;
+	}
+	if (mlx_is_key_down(box->mlx, MLX_KEY_S))
+	{
+		box->y_pos++;
+	}
+	if (mlx_is_key_down(box->mlx, MLX_KEY_A))
+	{
+		box->x_pos--;
+	}
+	
+	if (mlx_is_key_down(box->mlx, MLX_KEY_D))
+	{
+		box->x_pos++;
+	}
+	
+}
+/*esta funcion es la que engancha el bucle que mantiene la ventana abierta y
+el juego en marcha, a esta funcion podemos añadirles otras funciones como el 
+control de teclas para poder asignarle acciones a las teclas con la funcion
+key_control*/
+void ft_hook(void *param)
+{
+ 	t_box *box;
 
+	box = (t_box *)param;
+	key_control(box);
+}
 void printmap(char **map)
 {
 	int i;
@@ -61,11 +98,18 @@ void	initbox(t_box *box)
 	box->ancho = 0;
 	box->alto = 0;
 	box->coins = 0;
+	box->col = 0;
 	box->movs = 0;
 	box->exit = 0;
 	box->p_pos = 0;
 	box->x_pos = 0;
 	box->y_pos = 0;
+	box->mlx = NULL;
+	box->F_img = NULL;
+	box->C_img = NULL;
+	box->E_img = NULL;
+	box->P_img = NULL;
+	box->W_img = NULL;
 }
 
 int	main(int ac, char **av)
@@ -73,10 +117,14 @@ int	main(int ac, char **av)
 	t_box	box;
 	if (checkin_arg(ac, av[1]))
 		return (-1);
-	initbox(&box);
+	initbox(&box);//iniciamos los valores de la caja
 	ft_readsave_map(av[1], &box);
 	ft_checkmap(&box);
-	ft_start_game(&box);
+	box.mlx = mlx_init(box.ancho * PIX, box.alto * PIX, "so_long", 0);
+	ft_init_imgs(&box);//iniciamos la carga de imagenes
+	mlx_loop_hook(box.mlx, ft_hook, &box);
+	mlx_loop(box.mlx);
+	mlx_terminate(box.mlx);
 	//mlx_loop_hook(mlx, ft_hook, mlx);
 	return (0);
 }
