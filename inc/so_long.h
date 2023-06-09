@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:11:34 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/08 17:15:42 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:56:59 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ typedef struct s_box
 	mlx_image_t *E_img;//estructura de imagen del exit donde guardamos la imagen renderizada
 
 }		t_box;
-
-typedef struct s_img
-{
-	void *player;
-	void *wall;
-	void *floor;
-	void *coll;
-	void *exit;
-
-}	t_img;
 
 //FUNCIONES
 //-- check_args && check map

@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:25:31 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/08 18:18:09 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:14:44 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_load_image(t_box *box)
 toca renderizarlas o pasarlas a la ventana, para ello rellenamos el mapa
 con el fondo cuadricula a cuadricula y encima del fondo añadiremos el resto de elementos 
 a razon corresponda si es muro, coleccionable, etc. Lo haremos con la funcion
-MLX_IMAGE_TO_WINDOW multiplicando el num de posiciones de x o y * 64 para empezar 
+MLX_IMAGE_TO_WINDOW multiplicando el num de posiciones de x o y * 64(PIX) para empezar 
 a trabajar en pixeles*/
 void	ft_render_img(t_box *box)
 {

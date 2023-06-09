@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/08 18:31:39 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:14:43 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,68 @@
 #include "../inc/so_long.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
-/*con key_control añadimos funcionalidades a las teclas como cerrar la ventana si
-presionamos escape o mover nuestro player si presionas una u otra tecla*/
+
+void	ft_move_P_y(t_box *box, int direccion)
+{
+	if (direccion > 0)
+		box->P_img->instances[0].y += MOV;
+	if (direccion < 0)
+		box->P_img->instances[0].y -= MOV;	
+}
+
+void	ft_move_P_x(t_box *box, int direccion)
+{
+	if (direccion > 0)
+		box->P_img->instances[0].x += MOV;
+	if (direccion < 0)
+		box->P_img->instances[0].x -= MOV;
+}
+/*en key control asignamos la accion a realizar al presionar la tecla, en nuestro caso cerrar la ventana 
+con ESC o mover nuestro player, para mover nuestro player tenemos que usar una funcion -ft_move_P-
+x o y segun queramos mov horizontal o vertical y programaremos el movimiento usando las instancias
+dentro de la struct donde esta guardada nuestra imagen
+typedef struct mlx_image
+{
+	const uint32_t	width; 
+	const uint32_t	height;
+	uint8_t*		pixels;
+	mlx_instance_t*	instances;---es una struct con los ejes x y z con el que aplicaremos el movimiento
+	int32_t			count;
+	bool			enabled;
+	void*			context;
+}	mlx_image_t;*/
 void key_control(t_box *box)
 {
+	int	direccion;
+
+	direccion = 0;
 	if (mlx_is_key_down(box->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(box->mlx);
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_W))
 	{
+		direccion--;
+		ft_move_P_y(box, direccion);
 		box->y_pos--;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_S))
 	{
+		direccion++;
+		ft_move_P_y(box, direccion);
 		box->y_pos++;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_A))
 	{
+		direccion--;
+		ft_move_P_x(box, direccion);
 		box->x_pos--;
 	}
 	
 	if (mlx_is_key_down(box->mlx, MLX_KEY_D))
 	{
+		direccion++;
+		ft_move_P_x(box, direccion);
 		box->x_pos++;
 	}
 	
@@ -122,7 +161,7 @@ int	main(int ac, char **av)
 	ft_checkmap(&box);
 	box.mlx = mlx_init(box.ancho * PIX, box.alto * PIX, "so_long", 0);
 	ft_init_imgs(&box);//iniciamos la carga de imagenes
-	mlx_loop_hook(box.mlx, ft_hook, &box);
+	mlx_loop_hook(box.mlx, &ft_hook, &box);
 	mlx_loop(box.mlx);
 	mlx_terminate(box.mlx);
 	//mlx_loop_hook(mlx, ft_hook, mlx);
@@ -132,9 +171,9 @@ int	main(int ac, char **av)
 -Las teclas W, A, S y D se utilizarán para mover al personaje principal.
 -El jugador debe poder moverse en 4 direcciones: subir, bajar, ir a la izquierda o ir a la derecha.
 -El jugador no puede entrar dentro de las paredes.
--Pulsar la tecla ESC debe cerrar la ventana y cerrar el programa limpiamente.
+XXX-Pulsar la tecla ESC debe cerrar la ventana y cerrar el programa limpiamente.
 -Hacer clic en la cruz roja de la ventana debe cerrar la ventana y terminar el programa limpiamente.
--El mapa estará construido de 3 componentes: paredes, objetos y espacio abierto.
+XXX-El mapa estará construido de 3 componentes: paredes, objetos y espacio abierto.
 XXX-El mapa estará compuesto de solo 5 caracteres: 0 para un espacio vacío, 1 para un muro, C para un 
 coleccionable, E para salir del mapa y P para la posición inicial del jugador.
 XXX-El mapa debe tener una salida, al menos un objeto y una posición inicial.
