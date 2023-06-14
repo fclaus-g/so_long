@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkin.c                                          :+:      :+:    :+:   */
+/*   3checkin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:36:46 by fernandocla       #+#    #+#             */
-/*   Updated: 2023/06/09 13:17:02 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:08:48 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 /*en este archivo vamos a guardar las funciones necesarias para chequear 
-que la entrada sea valida tanto el nombre como las caracteristicas del mapa*/
-int	ft_mtrlen(char **matriz)
-{
-	int	i;
-
-	i = 0;
-	if (matriz == NULL)
-		return (0);
-	while (matriz[i] != NULL)
-		i++;
-	return (i);
-}
-
-/*con check_elements vamos a recorrer nuestra matriz o mapa caracter a caracter
+que la entrada sea valida tanto el nombre como las caracteristicas del mapa
+con check_elements vamos a recorrer nuestra matriz o mapa caracter a caracter
 y vamos a sumar contadores cada vez que nos encontremos con un elemento del juego
 para comprobar que hay al menos una salida, una moneda, y una posicion inicial de player
 y que no hay caracteres invalidos*/
@@ -46,20 +34,20 @@ int	ft_check_elements(t_box *box)
 				&& box->map[y][x] != '0' && box->map[y][x] != '1')
 				return (1);
 			else if (box->map[y][x] == 'C')
-				box->coins++;
+				box->col++;
 			else if (box->map[y][x] == 'E')
 				box->exit++;
 			else if (box->map[y][x] == 'P')
 			{
 				box->p_pos++;
-				box->x_pos = x;
-				box->y_pos = y;
+				box->x_pos = x;//aun no lo he usado
+				box->y_pos = y;//aun no lo he usado
 			}	
 			x++;
 		}
 		y++;
 	}
-	if (box->coins < 1 || box->exit < 1 || box->p_pos != 1)
+	if (box->col < 1 || box->exit < 1 || box->p_pos != 1)
 	 	return (1);
 	return (0);
 }
@@ -72,6 +60,9 @@ int	checkin_arg(int ac, char *str)
 		ft_printf("Error argumentos incorrectos\n");
 		return(1);
 	}
+	//comparamos .ber con los ultimos 4 caracteres de la cadena s
+	//no lo tengo muy visualizado pero sumandole a str la longitud de la cadena
+	//y restandole 4 nos quedamos con los ultimos 4 caracteres
 	if (ft_strncmp(str + ft_strlen(str) - 4, ".ber", 4) != 0)
 	{
 		ft_printf("Error argumento no es .ber\n");
@@ -108,27 +99,30 @@ caracter a caracter y si, la posicion es = 0 o = al alto o ancho -1 compruebe qu
 a '1' para retornarnos (1)*/
 int	ft_check_walls(t_box *box)
 {
-	int	c;
-	int	i;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (box->map[i])
+	y = 0;
+	while (box->map[y])
 	{
-		c = 0;
-		while(box->map[i][c])
+		x = 0;
+		while(box->map[y][x])
 		{
-			if (i == 0 | i == box->alto - 1 | c == 0 | c == box->ancho - 1)
+			//si y o x es igual a 0 o al alto o ancho -1 quiere decir que estar en el borde
+			//de la cuadricula y si en esa posicion no hay un 1 quiere decir que no esta cerrado
+			if (y == 0 | y == box->alto - 1 | x == 0 | x == box->ancho - 1)
 			{
-				if (box->map[i][c] != '1')
+				if (box->map[y][x] != '1')
 					return (1);
 			}
-			c++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	return (0);
 }
-
+//en checkmap vamos a llamar a las funciones anteriores para comprobar que el mapa es valido
+//es el centro de control de errores
 void ft_checkmap(t_box *box)
 {
 	if (ft_checkforma(box))

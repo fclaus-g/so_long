@@ -1,0 +1,11 @@
+.DS_Store
+/MLX42
+a.out
+src/*.o
+lib/libft/*.o
+lib/ft_printf/*.o
+lib/get_next_line/*.o
+lib/libft/libft.a
+a.out.dSYM
+so_long
+Makefile
