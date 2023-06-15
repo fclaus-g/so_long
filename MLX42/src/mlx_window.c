@@ -6,7 +6,7 @@
 /*   By: W2wizard <w2wizzard@gmail.com>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 01:14:59 by W2wizard      #+#    #+#                 */
-/*   Updated: 2022/11/22 09:06:54 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/06/29 15:34:25 by lde-la-h      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void mlx_update_matrix(const mlx_t* mlx, int32_t width, int32_t height)
 	const float depth = mlxctx->zdepth;
 
 	/**
-	 * In case the setting to stretch the image is set, we maintain the width and height but not
+	 * Incase the setting to stretch the image is set, we maintain the width and height but not
 	 * the depth.
 	 */
 	width = mlx_settings[MLX_STRETCH_IMAGE] ? mlxctx->initialWidth : mlx->width;
@@ -87,13 +87,7 @@ void mlx_set_icon(mlx_t* mlx, mlx_texture_t* image)
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(image);
 
-	const GLFWimage icon = {
-		.width = image->width,
-		.height = image->height,
-		.pixels = image->pixels
-	};
-
-	glfwSetWindowIcon(mlx->window, 1, &icon);
+	glfwSetWindowIcon(mlx->window, 1, (const GLFWimage*)image);
 }
 
 void mlx_set_window_pos(mlx_t* mlx, int32_t xpos, int32_t ypos)
