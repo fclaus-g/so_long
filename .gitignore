@@ -1,7 +1,0 @@
-.DS_Store
-*.o
-*.out
-Makefile
-so_long
-/lib/libft/libft.a
-/MLX42

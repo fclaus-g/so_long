@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 11:11:34 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 13:23:55 by fclaus-g         ###   ########.fr       */
+/*   Created: 2023/06/13 12:44:18 by fclaus-g          #+#    #+#             */
+/*   Updated: 2023/06/13 12:45:27 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include "../lib/get_next_line/get_next_line.h"
 #include "../lib/ft_printf/ft_printf.h"
 
-# define PIX 64//tamaño de cada cuadro de la cuadricula
-# define MOV 4//velocidad de movimiento del player
+# define PIX 64
+# define MOV 4
 
 
 //ESTRUCTURAS
@@ -95,7 +95,7 @@ void	ft_render_col(t_box *box);
 void	ft_render_exit(t_box *box);
 void	ft_render_player(t_box *box);
 //load_images.c
-void	ft_load_images(t_box *box);
+void	ft_load_image(t_box *box);
 void	ft_load_floor(t_box *box);
 void	ft_load_col(t_box *box);
 void ft_load_player(t_box *box);
