@@ -6,14 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 11:12:18 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:54:46 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../inc/so_long.h"
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../inc/so_long_bonus.h"
 
 /*esta funcion es la que engancha el bucle que mantiene la ventana abierta y
 el juego en marcha, a esta funcion podemos añadirles otras funciones como el 

@@ -6,12 +6,12 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:44:18 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 12:45:27 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:04:35 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"

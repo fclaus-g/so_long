@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 12:25:45 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:54 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 
 void	ft_move_P_y(t_box *box, int direccion)

@@ -6,7 +6,7 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 11:13:04 by fclaus-g          #+#    #+#              #
-#    Updated: 2023/06/09 14:54:27 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/06/15 16:09:25 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ LIBS42	= -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.
 CC		= gcc
 SRCS	= $(shell find ./src -iname "*.c")
 OBJS	= ${SRCS:.c=.o}
+BONUSSRC = ${shell find ./bonus -iname "*.c"}
+BONUSOBJ = ${BONUSSRC:.c=.o}
 
 all: libmlx libft libgnl libpf $(NAME)
 
@@ -44,7 +46,7 @@ libgnl :
 libpf :
 	@make -C ${LIBPF}
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<\n)"
 
 
 #COMPILACION EN CASA
@@ -55,8 +57,17 @@ libpf :
 $(NAME) : $(OBJS)
 	${CC} $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o $(NAME)
 
-$(OBJ) : $(SRC)
-	$(CC) $(CFLAGS) $(OPTION) $(SRC)
+#$(OBJ) : $(SRC)
+#	$(CC) $(CFLAGS) $(SRC)
+
+bonus : libmlx libft libgnl libpf $(BONUSOBJ)
+	${CC} $(CFLAGS) $(BONUSOBJ) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o so_long_bonus
+
+%.o: bonus/%.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<\n)"
+	
+#$(BONUSOBJ):$(BONUSSRC)	
+#	$(CC) $(CFLAGS) $(BONUSSRC)
 
 debug:
 		@gcc -Wall -Wextra -Werror -g ./src/*.c $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a \

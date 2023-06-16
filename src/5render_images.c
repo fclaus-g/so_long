@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:25:31 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/14 09:58:13 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:29:48 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ si renderizo el player en la misma funcion que el fondo, el player se renderiza
 por encima del fondo pero en algunas cuadriculas se oculta, se soluciona renderizando el 
 player aparte pero no entiendo porque ocurre esto, si establezco el eje z muy alto
 el player desaparece, si lo establezco muy bajo se oculta en algunas cuadriculas
-*/
-/*IMPORTANTE PARA UNA BUENA RENDERIZACION ES INTERESANTE HACER UNA
+IMPORTANTE PARA UNA BUENA RENDERIZACION ES INTERESANTE HACER UNA
 FUNCION POR ELEMENTO PARA EVITAR ERRORES Y QUE LAS INSTANCIAS SE REFLEJEN 
 O ALMACENEN BIEN*/
+
+/*PROBLEMA el player se carga encima de algunas monedas y debajo de otras*/
 void	ft_render_floor(t_box *box)
 {
 	int		y;
@@ -42,7 +43,7 @@ void	ft_render_floor(t_box *box)
 		while (x < box->ancho)
 		{
 			mlx_image_to_window(box->mlx, box->F_img1, x * PIX, y * PIX);
-			mlx_set_instance_depth(&box->F_img1->instances[0], 10);
+			mlx_set_instance_depth(&box->F_img1->instances[box->floor], 10);
 			box->floor++;
 			x++;	
 		}
@@ -63,7 +64,7 @@ void	ft_render_wall(t_box *box)
 			if (box->map[y][x] == '1')
 			{
 				mlx_image_to_window(box->mlx, box->W_img, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->W_img->instances[0], 50);
+				mlx_set_instance_depth(&box->W_img->instances[box->wall], 50);
 				box->wall++;
 			}
 			x++;
@@ -86,14 +87,15 @@ void	ft_render_col(t_box *box)
 			if (box->map[y][x] == 'C')
 			{
 				mlx_image_to_window(box->mlx, box->C_img1, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->C_img1->instances[0], 110);
+				mlx_set_instance_depth(&box->C_img1->instances[box->coins], 110);
 				box->coins++;
 			}
 			x++;
 		}
 		y++;
 	}
-	//printf("coins: %d\n", box->coins);
+	ft_printf("coins: %d\n", box->coins);
+	ft_printf("col:%d\n", box->col);
 }
 void	ft_render_exit(t_box *box)
 {

@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:36:46 by fernandocla       #+#    #+#             */
-/*   Updated: 2023/06/13 11:51:32 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:16 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 /*en este archivo vamos a guardar las funciones necesarias para chequear 
 que la entrada sea valida tanto el nombre como las caracteristicas del mapa*/
 int	ft_mtrlen(char **matriz)

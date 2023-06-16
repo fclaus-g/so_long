@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/14 11:53:55 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:18:33 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct mlx_image
 	const uint32_t	height;
 	uint8_t*		pixels;
 	mlx_instance_t*	instances;---es una struct con los ejes x y z con el que aplicaremos el movimiento
-	int32_t			count;
-	bool			enabled;
+	int32_t			count;		con respecto a las instances se creara una por cada elemento cargado
+	bool			enabled;	Ej: si hay 10 monedas habra 10 instancias de monedas cada una con sus ejes
 	void*			context;
 }	mlx_image_t;*/
 void key_control(t_box *box)
@@ -91,6 +91,7 @@ void key_control(t_box *box)
 		box->movs++;
 	}
 	
+	
 }
 /*Para mover al personaje hay que tener en cuenta que esta en una cuadricula 
 referenciada por la esquina superior derecha por lo que, para evitar que se
@@ -113,7 +114,6 @@ void	ft_move_up(t_box *box)
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
-		ft_printf("up\n");
 		ft_quit_col(box, y + 32, x + 32);
 	}
 
@@ -133,9 +133,7 @@ void	ft_move_down(t_box *box)
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
-		ft_printf("down\n");
 		ft_quit_col(box, y + 32, x + 32);
-
 	}
 }
 
@@ -154,7 +152,6 @@ void	ft_move_left(t_box *box)
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
-		ft_printf("left\n");
 		ft_quit_col(box, y + 32, x + 32);
 	}
 }
@@ -173,8 +170,7 @@ void	ft_move_right(t_box *box)
 		ft_move_P_x(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{
-		ft_printf("right\n");
+	{		
 		ft_quit_col(box, y + 32, x + 32);
 	}
 }

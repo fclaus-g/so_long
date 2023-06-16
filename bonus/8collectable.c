@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:05:42 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 11:10:04 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:07:05 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 void	ft_quit_col(t_box *box, int y, int x)
 {
@@ -28,7 +28,7 @@ void	ft_quit_col(t_box *box, int y, int x)
 		}
 		i++;
 	}
-	printf("coins: %d\n", box->coins);
+	//printf("coins: %d\n", box->coins);
 	if (box->coins == 0)
 	{
 		ft_open_door(box);

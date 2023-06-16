@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 12:04:14 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:05:52 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 /*en ft_readsave_map leemos dentro del .ber linea por linea gracias a gnl
 y lo almacenamos en una string con todo el contenido del mapa el cual pasaremos

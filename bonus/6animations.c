@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:41:56 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 12:15:52 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:41 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 /*con la funcion swap_z lo que hacemos es cambiar la instancia entre
 dos imagenes multiplicando por -1 las instancias de la imagen teniendo en cuenta

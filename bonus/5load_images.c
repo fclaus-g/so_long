@@ -6,11 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:48:17 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 12:13:16 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:35 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 /*en primer lugar tenemos que cargar las imagenes usando una struct textura
 auxiliar que igualaremos al resultado de la funcion MLX_LOAD_PNG con el path
