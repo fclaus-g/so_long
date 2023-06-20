@@ -6,7 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:05:42 by fclaus-g          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/15 14:53:03 by fclaus-g         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/14 16:57:41 by fclaus-g         ###   ########.fr       */
+>>>>>>> 995ffbe (casa 20/06)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +40,12 @@ void	ft_quit_col(t_box *box, int y, int x)
 		}
 		i++;
 	}
+<<<<<<< HEAD
+=======
+	
+	printf("coins: %d\n", box->coins);
+	
+>>>>>>> 995ffbe (casa 20/06)
 	if (box->coins == 0)
 		ft_open_door(box);
 }

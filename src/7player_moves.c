@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/15 14:18:33 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:44:55 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	ft_move_down(t_box *box)
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
+		
 	}
 }
 
@@ -170,7 +171,7 @@ void	ft_move_right(t_box *box)
 		ft_move_P_x(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{		
+	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
 }
