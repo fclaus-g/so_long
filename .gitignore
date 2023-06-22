@@ -1,0 +1,9 @@
+Makefile
+*.o
+MLX42
+lib
+.DS_Store
+*.a
+a.out
+so_long
+a.out.dSYM

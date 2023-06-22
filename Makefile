@@ -6,7 +6,7 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 11:13:04 by fclaus-g          #+#    #+#              #
-#    Updated: 2023/06/15 16:09:25 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/06/20 16:48:42 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ BONUSOBJ = ${BONUSSRC:.c=.o}
 all: libmlx libft libgnl libpf $(NAME)
 
 #COMPILACION EN CASA
-#libmlx:
-#	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
 
 #COMPILACION EN 42
-libmlx :
-	@make -C ${LIBMLX}
+#libmlx :
+#	@make -C ${LIBMLX}
 
 libft  :
 	@make -C ${LIBFT}
@@ -50,12 +50,12 @@ libpf :
 
 
 #COMPILACION EN CASA
-#$(NAME): $(OBJS)
-#	@$(CC) $(OBJS) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o $(NAME)
 
 #COMPILACION EN 42
-$(NAME) : $(OBJS)
-	${CC} $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o $(NAME)
+#$(NAME) : $(OBJS)
+#	${CC} $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o $(NAME)
 
 #$(OBJ) : $(SRC)
 #	$(CC) $(CFLAGS) $(SRC)

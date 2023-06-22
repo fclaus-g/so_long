@@ -6,11 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:05:42 by fclaus-g          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/15 14:53:03 by fclaus-g         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/14 16:57:41 by fclaus-g         ###   ########.fr       */
->>>>>>> 995ffbe (casa 20/06)
+/*   Updated: 2023/06/21 18:49:59 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +31,16 @@ void	ft_quit_col(t_box *box, int y, int x)
 		{
 			box->C_img1->instances[i].enabled = false;
 			box->coins--;
-			printf("coins%d\n", box->coins);
 			return ;
 		}
 		i++;
 	}
-<<<<<<< HEAD
-=======
-	
-	printf("coins: %d\n", box->coins);
-	
->>>>>>> 995ffbe (casa 20/06)
 	if (box->coins == 0)
 		ft_open_door(box);
 }
 
 void	ft_open_door(t_box *box)
 {
-	int	i;
-
-	i = 0;
 	if ( box->coins == 0)
 	{
 		mlx_set_instance_depth(&box->E_img1->instances[0], -210);

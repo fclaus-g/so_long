@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/20 16:44:55 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:16:43 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_move_P_y(t_box *box, int direccion)
 		box->Pl_img1->instances[0].y -= MOV;
 		box->Pr_img1->instances[0].y -= MOV;
 	}
-		
+	box->movs += MOV;	
 }
 
 void	ft_move_P_x(t_box *box, int direccion)
@@ -40,6 +40,7 @@ void	ft_move_P_x(t_box *box, int direccion)
 		box->Pl_img1->instances[0].x -= MOV;
 		box->Pr_img1->instances[0].x -= MOV;
 	}
+	box->movs += MOV;
 }
 /*en key control asignamos la accion a realizar al presionar la tecla, en nuestro caso cerrar la ventana 
 con ESC o mover nuestro player, para mover nuestro player tenemos que usar una funcion -ft_move_P-
@@ -66,21 +67,18 @@ void key_control(t_box *box)
 	{
 		ft_move_up(box);
 		box->y_pos--;
-		box->movs++;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_S)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_DOWN))
 	{
 		ft_move_down(box);
 		box->y_pos++;
-		box->movs++;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_A)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_LEFT))
 	{
 		ft_move_left(box);
 		box->x_pos--;
-		box->movs++;
 	}
 	
 	if (mlx_is_key_down(box->mlx, MLX_KEY_D)
@@ -88,7 +86,6 @@ void key_control(t_box *box)
 	{
 		ft_move_right(box);
 		box->x_pos++;
-		box->movs++;
 	}
 	
 	
@@ -107,16 +104,18 @@ void	ft_move_up(t_box *box)
 
 	x = box->Pr_img1->instances[0].x;
 	y = box->Pr_img1->instances[0].y;
-	if (box->map[(y - MOV) / PIX][(x + 10)/ PIX] != '1' 
-		&& box->map[(y - MOV) / PIX][(x + 50) / PIX] != '1')
+	if ((box->map[(y - MOV) / PIX][(x + 10)/ PIX] != '1' 
+		&& box->map[(y - MOV) / PIX][(x + 50) / PIX] != '1'))
 	{
-		ft_move_P_y(box, -1);
+		if (box->map[(y + 15 - MOV) / PIX][(x + 25)/ PIX] != 'E' 
+			&& box->map[(y + 15 - MOV) / PIX][(x + 35) / PIX] != 'E')
+			ft_move_P_y(box, -1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
-
+	check_finish(box, y, x);
 }
 
 void	ft_move_down(t_box *box)
@@ -129,7 +128,9 @@ void	ft_move_down(t_box *box)
 	if (box->map[((y + 60) + MOV) / PIX][(x + 10) / PIX] != '1'
 		&& box->map[((y + 60) + MOV) / PIX][(x + 50) / PIX] != '1')
 	{
-		ft_move_P_y(box, 1);
+		if(box->map[((y + 45) + MOV) / PIX][(x + 25) / PIX] != 'E'
+			&& box->map[((y + 45) + MOV) / PIX][(x + 35) / PIX] != 'E')
+			ft_move_P_y(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
@@ -149,12 +150,15 @@ void	ft_move_left(t_box *box)
 	if (box->map[(y) / PIX][((x + 10) - MOV) / PIX] != '1'
 		&& box->map[((y + 60)) / PIX][((x + 10) - MOV) / PIX] != '1')
 	{
+		if (box->map[(y + 15) / PIX][((x + 25) - MOV) / PIX] != 'E'
+		&& box->map[((y + 45)) / PIX][((x + 25) - MOV) / PIX] != 'E')
 		ft_move_P_x(box, -1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
+	check_finish(box, y, x);
 }
 
 void	ft_move_right(t_box *box)
@@ -168,12 +172,15 @@ void	ft_move_right(t_box *box)
 	if (box->map[(y) / PIX][((x + 50) + MOV)/ PIX] != '1'
 		&& box->map[((y + 60)) / PIX][((x + 50) + MOV) / PIX] != '1')
 	{
+		if (box->map[(y + 15) / PIX][((x + 40) + MOV)/ PIX] != 'E'
+		&& box->map[((y + 45)) / PIX][((x + 40) + MOV) / PIX] != 'E')
 		ft_move_P_x(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
+	check_finish(box, y , x);
 }
 
 void ft_player_direction(t_box *box, char c)

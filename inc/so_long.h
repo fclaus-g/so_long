@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:11:34 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/13 13:23:55 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:08:27 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@
 typedef struct s_box
 {
 	char **map;//matriz del mapa
+	char **map2;//copia del mapa
 	int alto;//altura del mapa
 	int ancho;//anchura del mapa
 	//contadores
 	int coins;//contador de coleccionables recogidos
 	int col;//contador de coleccionables puestos en mapa
-	int movs;//contador de movimientos
+	int movs;//contador de movimientos en pixeles
+	int	moves;//contador de movs en cuadricula 
 	int exit;//contador de salidas
 	int	p_pos;//num de entradas
 	int floor;//num de floor
@@ -51,22 +53,12 @@ typedef struct s_box
 	//estructuras de mlx
 	mlx_t *mlx;//estructura de mlx
 	mlx_image_t *Pr_img1;//estructura de imagen del player donde guardamos la imagen renderizada
-	mlx_image_t	*Pr_img2;//derecha
 	mlx_image_t	*Pl_img1;//izquierda
-	mlx_image_t	*Pl_img2;//izquierda
 	mlx_image_t *F_img1;//estructura de imagen del floor donde guardamos la imagen renderizada
-	mlx_image_t *F_img2;
-	mlx_image_t *F_img3;
 	mlx_image_t	*W_img;//estructura de imagen del wall donde guardamos la imagen renderizada
-	mlx_image_t	*C_img1;
-	mlx_image_t	*C_img2;
-	mlx_image_t	*C_img3;
-	mlx_image_t	*C_img4;
-	mlx_image_t	*C_img5;//estructura de imagen del collectible donde guardamos la imagen renderizada
-	mlx_image_t *E_img1;
-	mlx_image_t *E_img2;
-	mlx_image_t *E_img3;
-	mlx_image_t *E_img4;//estructura de imagen del exit donde guardamos la imagen renderizada
+	mlx_image_t	*C_img1;//estructura de imagen del collectible donde guardamos la imagen renderizada
+	mlx_image_t *E_img1;//estructura de imagen del exit donde guardamos la imagen renderizada
+	mlx_image_t *E_img4;
 }		t_box;
 
 //FUNCIONES
@@ -120,4 +112,6 @@ void	col_animation(t_box *box, int timer);
 void	ft_open_door(t_box *box);
 void ft_player_direction(t_box *box, char c);
 void	player_animation(t_box *box, int timer, char c);
+void	check_finish(t_box *box, int y, int x);
+void	moves_control(t_box *box);
 #endif
