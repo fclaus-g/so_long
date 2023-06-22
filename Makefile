@@ -6,7 +6,7 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 11:13:04 by fclaus-g          #+#    #+#              #
-#    Updated: 2023/06/15 16:09:25 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/06/20 11:47:23 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ bonus : libmlx libft libgnl libpf $(BONUSOBJ)
 
 debug:
 		@gcc -Wall -Wextra -Werror -g ./src/*.c $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a \
-		$(LIBS)
+		$(LIBS42)
 		@echo "\033[0;32mArchivo debug generado"
 clean:
 	@rm -f $(OBJS)

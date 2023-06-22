@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/15 14:31:43 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:44:55 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	initbox(t_box *box)
 	box->wall = 0;
 	box->floor = 0;
 	box->exit = 0;
+	box->exit_open = 0;
 	box->p_pos = 0;
 	box->x_pos = 0;
 	box->y_pos = 0;
