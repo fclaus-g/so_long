@@ -6,14 +6,26 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/20 11:49:57 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:12:03 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "../inc/so_long.h"
-#include "../MLX42/include/MLX42/MLX42.h"
+
+void	free_so_long(t_box *box)
+{
+	//free(box->map);
+	free(box->mlx);
+}
+void	moves_control(t_box *box)
+{
+	if (box->movs >= 64)
+	{
+		box->moves++;
+		box->movs = 0;
+		ft_printf("Movimientos:%d\n", box->moves);
+	}
+}
 
 /*esta funcion es la que engancha el bucle que mantiene la ventana abierta y
 el juego en marcha, a esta funcion podemos añadirles otras funciones como el 
@@ -25,10 +37,13 @@ void ft_hook(void *param)
 
 	box = (t_box *)param;
 	key_control(box);
-	mlx_put_string(box->mlx, "movimientos", 10, 10);
+	moves_control(box);
 }
 
-
+void	ft_leaks(void)
+{
+	system("leaks so_long");
+}
 
 int	main(int ac, char **av)
 {
@@ -44,6 +59,8 @@ int	main(int ac, char **av)
 	mlx_loop_hook(box.mlx, &ft_hook, &box);//enganchamos el bucle de la ventana
 	mlx_loop(box.mlx);//iniciamos el bucle de la ventana
 	mlx_terminate(box.mlx);//cerramos la ventana
+	free_so_long(&box);//liberamos la memoria
+	atexit (ft_leaks);
 	return (0);
 }
 /*

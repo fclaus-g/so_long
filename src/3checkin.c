@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:36:46 by fernandocla       #+#    #+#             */
-/*   Updated: 2023/06/13 13:08:48 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:22:40 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	ft_check_elements(t_box *box)
 			else if (box->map[y][x] == 'P')
 			{
 				box->p_pos++;
-				box->x_pos = x;//aun no lo he usado
-				box->y_pos = y;//aun no lo he usado
+				box->x_pos = x;//se usa en floodfill
+				box->y_pos = y;//se usa en floodfill
 			}	
 			x++;
 		}
@@ -121,6 +121,41 @@ int	ft_check_walls(t_box *box)
 	}
 	return (0);
 }
+int	way_ok(t_box *box)
+{
+	int	x;
+	int y;
+
+	y = 0;
+	while (box->map2[++y])
+	{
+		x = 0;
+		while (box->map2[y][++x])
+		{
+			if (box->map2[y][x] == 'C' || box->map2[y][x] == 'E' || box->map2[y][x] == 'P')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	free(box->map2);
+	return (0);
+}
+
+void	flood_fill(t_box *box, int y, int x)
+{
+	if (y < 0 || y > box->alto || x < 0 || x > box->ancho || box->map2[y][x] == '1'
+		|| box->map2[y][x] == 'F')
+		return ;
+	if (box->map2[y][x] == 'C')
+		box->map2[y][x] = '0';
+	box->map2[y][x] = 'F';
+	flood_fill(box, y + 1, x);
+	flood_fill(box, y - 1, x);
+	flood_fill(box, y, x + 1);
+	flood_fill(box, y, x - 1);
+}
+
 //en checkmap vamos a llamar a las funciones anteriores para comprobar que el mapa es valido
 //es el centro de control de errores
 void ft_checkmap(t_box *box)
@@ -138,6 +173,12 @@ void ft_checkmap(t_box *box)
 	if (ft_check_walls(box))
 	{
 		ft_printf("Error el mapa no esta cerrado\n");
+		exit(1);
+	}
+	flood_fill(box, box->y_pos, box->x_pos);
+	if (way_ok(box))
+	{
+		ft_printf("Error el mapa no tiene salida\n");
 		exit(1);
 	}
 

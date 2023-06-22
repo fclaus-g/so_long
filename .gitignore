@@ -1,9 +1,9 @@
-a.out
-a.out.dSYM
-*.o
 Makefile
+*.o
 MLX42
 lib
-.DS_store
-so_long
+.DS_Store
 *.a
+a.out
+so_long
+a.out.dSYM

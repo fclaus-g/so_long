@@ -6,11 +6,27 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/20 11:44:55 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:12:34 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+void	check_empty_line(char *str)
+{
+	int	c;
+
+	c = 0;
+	while (str[c])
+	{
+		if(str[c] == '\n' && str[c + 1] == '\n')
+		{
+			ft_printf("Error, parece que una linea esta vacía");
+			exit (1);
+		}	
+		c++;
+	}
+}
 
 /*en ft_readsave_map leemos dentro del .ber linea por linea gracias a gnl
 y lo almacenamos en una string con todo el contenido del mapa el cual pasaremos
@@ -33,7 +49,9 @@ void	ft_readsave_map(char *str, t_box *box)
 	}
 	free(line);
 	close(fd);
+	check_empty_line(map_str);		
 	box->map = ft_split(map_str, '\n');
+	box->map2 = ft_split(map_str, '\n');
 	free(map_str);
 	printmap(box->map);
 }
@@ -53,6 +71,7 @@ int	ft_mtrlen(char **matriz)
 void	initbox(t_box *box)
 {
 	box->map = NULL;
+	box->map2 = NULL;
 	box->ancho = 0;
 	box->alto = 0;
 	box->coins = 0;
@@ -71,21 +90,11 @@ void	initbox(t_box *box)
 	box->P_frame = 0;
 	box->mlx = NULL;
 	box->F_img1 = NULL;
-	box->F_img2 = NULL;
-	box->F_img3 = NULL;
 	box->C_img1 = NULL;
-	box->C_img2 = NULL;
-	box->C_img3 = NULL;
-	box->C_img4 = NULL;
-	box->C_img5 = NULL;
 	box->E_img1 = NULL;
-	box->E_img2 = NULL;
-	box->E_img3 = NULL;
 	box->E_img4 = NULL;
 	box->Pr_img1 = NULL;
-	box->Pr_img2 = NULL;
 	box->Pl_img1 = NULL;
-	box->Pl_img2 = NULL;
 	box->W_img = NULL;
 }
 

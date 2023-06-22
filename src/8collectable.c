@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:05:42 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/20 11:49:49 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:12:12 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_quit_col(t_box *box, int y, int x)
 		{
 			box->C_img1->instances[i].enabled = false;
 			box->coins--;
-			printf("coins%d\n", box->coins);
 			return ;
 		}
 		i++;
@@ -42,9 +41,6 @@ void	ft_quit_col(t_box *box, int y, int x)
 
 void	ft_open_door(t_box *box)
 {
-	int	i;
-
-	i = 0;
 	if ( box->coins == 0)
 	{
 		mlx_set_instance_depth(&box->E_img1->instances[0], -210);
