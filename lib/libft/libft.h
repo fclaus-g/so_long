@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fernandoclaus <fernandoclaus@student.42    +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:12:23 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/04/19 08:58:23 by fernandocla      ###   ########.fr       */
+/*   Updated: 2023/06/23 14:12:13 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t count, size_t size);
-void	*free_matrix(char **matrix);
+//void	free_matrix(char **matrix);
 
 //file descriptor
 void	ft_putchar_fd(char c, int fd);

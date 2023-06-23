@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:55:56 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/21 18:45:42 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:43:33 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ void	check_finish(t_box *box, int y, int x)
 		exit (0);
 	}
 	//abajo
-	else if(box->map[((y + 40) + MOV) / PIX][(x + 20) / PIX] == 'E'
-		&& box->map[((y + 40) + MOV) / PIX][(x + 40) / PIX] == 'E'
+	else if(box->map[((y + 55) + MOV) / PIX][(x + 20) / PIX] == 'E'
+		&& box->map[((y + 55) + MOV) / PIX][(x + 40) / PIX] == 'E'
 		&& box->coins == 0)
 	{
 		ft_printf("YOU WIN");
 		exit (0);
 	}
-	else if (box->map[(y + 20) / PIX][((x + 25) - MOV) / PIX] == 'E'
-		&& box->map[((y + 40)) / PIX][((x + 25) - MOV) / PIX] == 'E'
+	else if (box->map[(y + 20) / PIX][((x + 10) - MOV) / PIX] == 'E'
+		&& box->map[((y + 55)) / PIX][((x + 10) - MOV) / PIX] == 'E'
 		&& box->coins == 0)
 	{
 		ft_printf("YOU WIN");
 		exit (0);
 	}
-	else if (box->map[(y + 20) / PIX][((x + 20) + MOV)/ PIX] == 'E'
-		&& box->map[((y + 40)) / PIX][((x + 20) + MOV) / PIX] == 'E'
+	else if (box->map[(y + 20) / PIX][((x + 45) + MOV)/ PIX] == 'E'
+		&& box->map[((y + 55)) / PIX][((x + 45) + MOV) / PIX] == 'E'
 		&& box->coins == 0)
 	{
 		ft_printf("YOU WIN");

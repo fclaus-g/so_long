@@ -6,16 +6,30 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/22 14:12:03 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:16:05 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i] != NULL)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+
 void	free_so_long(t_box *box)
 {
-	//free(box->map);
-	free(box->mlx);
+	
+	free_matrix(box->map);
+	free_matrix(box->map2);
 }
 void	moves_control(t_box *box)
 {
@@ -58,6 +72,7 @@ int	main(int ac, char **av)
 	ft_init_imgs(&box);//iniciamos la carga de imagenes
 	mlx_loop_hook(box.mlx, &ft_hook, &box);//enganchamos el bucle de la ventana
 	mlx_loop(box.mlx);//iniciamos el bucle de la ventana
+	
 	mlx_terminate(box.mlx);//cerramos la ventana
 	free_so_long(&box);//liberamos la memoria
 	atexit (ft_leaks);

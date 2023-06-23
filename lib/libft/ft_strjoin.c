@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:23:16 by fclaus-g          #+#    #+#             */
-/*   Updated: 2022/10/24 11:43:56 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:13:02 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		c2++;
 	}
 	s3[count + c2] = 0;
+	free((char *)s1);
 	return (s3);
 }

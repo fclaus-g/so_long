@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:25:31 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/21 18:47:48 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:48:41 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ IMPORTANTE PARA UNA BUENA RENDERIZACION ES INTERESANTE HACER UNA
 FUNCION POR ELEMENTO PARA EVITAR ERRORES Y QUE LAS INSTANCIAS SE REFLEJEN 
 O ALMACENEN BIEN*/
 
-/*PROBLEMA el player se carga encima de algunas monedas y debajo de otras*/
+/*PROBLEMA en mapas pequeños no sale el  player no se porque*/
 void	ft_render_floor(t_box *box)
 {
 	int		y;
@@ -43,7 +43,7 @@ void	ft_render_floor(t_box *box)
 		while (x < box->ancho)
 		{
 			mlx_image_to_window(box->mlx, box->F_img1, x * PIX, y * PIX);
-			mlx_set_instance_depth(&box->F_img1->instances[box->floor], 10);
+			mlx_set_instance_depth(&box->F_img1->instances[box->floor], 1);
 			box->floor++;
 			x++;	
 		}
@@ -64,7 +64,7 @@ void	ft_render_wall(t_box *box)
 			if (box->map[y][x] == '1')
 			{
 				mlx_image_to_window(box->mlx, box->W_img, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->W_img->instances[box->wall], 50);
+				mlx_set_instance_depth(&box->W_img->instances[box->wall], 5);
 				box->wall++;
 			}
 			x++;
@@ -87,7 +87,7 @@ void	ft_render_col(t_box *box)
 			if (box->map[y][x] == 'C')
 			{
 				mlx_image_to_window(box->mlx, box->C_img1, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->C_img1->instances[box->coins], 110);
+				mlx_set_instance_depth(&box->C_img1->instances[box->coins], 10);
 				box->coins++;
 			}
 			x++;
@@ -112,8 +112,8 @@ void	ft_render_exit(t_box *box)
 			{
 				mlx_image_to_window(box->mlx, box->E_img1, x * PIX, y * PIX);
 				mlx_image_to_window(box->mlx, box->E_img4, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->E_img1->instances[0], 210);
-				mlx_set_instance_depth(&box->E_img4->instances[0], -220);
+				mlx_set_instance_depth(&box->E_img1->instances[0], 15);
+				mlx_set_instance_depth(&box->E_img4->instances[0], -16);
 			}
 			x++;
 		}
@@ -142,8 +142,8 @@ void	ft_render_player(t_box *box)
 				box->y_pos = y;
 				mlx_image_to_window(box->mlx, box->Pr_img1, box->x_pos * PIX, box->y_pos * PIX);
 				mlx_image_to_window(box->mlx, box->Pl_img1, box->x_pos * PIX, box->y_pos * PIX);
-				mlx_set_instance_depth(&box->Pr_img1->instances[0], 310);//damos instancia positiva para que se vea
-				mlx_set_instance_depth(&box->Pl_img1->instances[0], -320);//damos instancia negativa para que no se vea
+				mlx_set_instance_depth(&box->Pr_img1->instances[0], 20);//damos instancia positiva para que se vea
+				mlx_set_instance_depth(&box->Pl_img1->instances[0], -21);//damos instancia negativa para que no se vea
 			}
 			x++;
 		}

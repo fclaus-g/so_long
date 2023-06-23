@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:36:46 by fernandocla       #+#    #+#             */
-/*   Updated: 2023/06/22 11:22:40 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:01:40 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_check_elements(t_box *box)
 	int x;
 
 	y = 0;
-	
 	while (box->map[y])
 	{
 		x = 0;
@@ -57,7 +56,7 @@ int	checkin_arg(int ac, char *str)
 {
 	if (ac != 2)
 	{
-		ft_printf("Error argumentos incorrectos\n");
+		ft_putstr_fd("Error argumentos incorrectos\n", 2);
 		return(1);
 	}
 	//comparamos .ber con los ultimos 4 caracteres de la cadena s
@@ -65,7 +64,7 @@ int	checkin_arg(int ac, char *str)
 	//y restandole 4 nos quedamos con los ultimos 4 caracteres
 	if (ft_strncmp(str + ft_strlen(str) - 4, ".ber", 4) != 0)
 	{
-		ft_printf("Error argumento no es .ber\n");
+		ft_putstr_fd("Error argumento no es .ber\n", 2);
 		return(1);
 	}
 	return (0);
@@ -138,7 +137,6 @@ int	way_ok(t_box *box)
 		}
 		y++;
 	}
-	free(box->map2);
 	return (0);
 }
 
@@ -162,23 +160,23 @@ void ft_checkmap(t_box *box)
 {
 	if (ft_checkforma(box))
 	{
-		ft_printf("Error el mapa no es rectangular\n");
+		ft_putstr_fd("Error el mapa no es rectangular\n", 2);
 		exit(1);
 	}
 	if (ft_check_elements(box))
 	{
-		ft_printf("Error el mapa no tiene los elementos necesarios\n");
+		ft_putstr_fd("Error el mapa no tiene los elementos necesarios\n", 2);
 		exit(1);
 	}
 	if (ft_check_walls(box))
 	{
-		ft_printf("Error el mapa no esta cerrado\n");
+		ft_putstr_fd("Error el mapa no esta cerrado\n", 2);
 		exit(1);
 	}
 	flood_fill(box, box->y_pos, box->x_pos);
 	if (way_ok(box))
 	{
-		ft_printf("Error el mapa no tiene salida\n");
+		ft_putstr_fd("Error el mapa no tiene salida\n", 2);
 		exit(1);
 	}
 
