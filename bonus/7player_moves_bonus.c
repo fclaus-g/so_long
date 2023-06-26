@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   7player_moves.c                                    :+:      :+:    :+:   */
+/*   7player_moves_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/15 15:06:54 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:45:17 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ void	ft_move_P_y(t_box *box, int direccion)
 	if (direccion > 0)
 	{
 		box->Pr_img1->instances[0].y += MOV;
-		box->Pr_img2->instances[0].y += MOV;
 		box->Pl_img1->instances[0].y += MOV;
-		box->Pl_img2->instances[0].y += MOV;
+		box->movs += MOV;
 	}
 	if (direccion < 0)
 	{
 		box->Pl_img1->instances[0].y -= MOV;
-		box->Pl_img2->instances[0].y -= MOV;
 		box->Pr_img1->instances[0].y -= MOV;
-		box->Pr_img2->instances[0].y -= MOV;
+		box->movs += MOV;
 	}
 		
 }
@@ -36,17 +34,15 @@ void	ft_move_P_x(t_box *box, int direccion)
 {
 	if (direccion > 0)
 	{
-		box->Pr_img1->instances[0].x += MOV;
-		box->Pr_img2->instances[0].x += MOV;
+		box->Pr_img1->instances[0].x += MOV;	
 		box->Pl_img1->instances[0].x += MOV;
-		box->Pl_img2->instances[0].x += MOV;
+		box->movs += MOV;
 	}	
 	if (direccion < 0)
 	{
-		box->Pl_img1->instances[0].x -= MOV;
-		box->Pl_img2->instances[0].x -= MOV;
+		box->Pl_img1->instances[0].x -= MOV;	
 		box->Pr_img1->instances[0].x -= MOV;
-		box->Pr_img2->instances[0].x -= MOV;
+		box->movs += MOV;
 	}
 }
 /*en key control asignamos la accion a realizar al presionar la tecla, en nuestro caso cerrar la ventana 
@@ -74,21 +70,21 @@ void key_control(t_box *box)
 	{
 		ft_move_up(box);
 		box->y_pos--;
-		box->movs++;
+		//box->movs++;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_S)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_DOWN))
 	{
 		ft_move_down(box);
 		box->y_pos++;
-		box->movs++;
+		//box->movs++;
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_A)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_LEFT))
 	{
 		ft_move_left(box);
 		box->x_pos--;
-		box->movs++;
+		//box->movs++;
 	}
 	
 	if (mlx_is_key_down(box->mlx, MLX_KEY_D)
@@ -96,7 +92,7 @@ void key_control(t_box *box)
 	{
 		ft_move_right(box);
 		box->x_pos++;
-		box->movs++;
+		//box->movs++;
 	}
 	
 }
@@ -117,13 +113,15 @@ void	ft_move_up(t_box *box)
 	if (box->map[(y - MOV) / PIX][(x + 10)/ PIX] != '1' 
 		&& box->map[(y - MOV) / PIX][(x + 50) / PIX] != '1')
 	{
-		ft_move_P_y(box, -1);
+		//if (box->map[(y + 15 - MOV) / PIX][(x + 20)/ PIX] != 'E' 
+		//	&& box->map[(y + 15 - MOV) / PIX][(x + 40) / PIX] != 'E')
+			ft_move_P_y(box, -1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
-
+	ft_check_finish(box, y, x);
 }
 
 void	ft_move_down(t_box *box)
@@ -136,12 +134,15 @@ void	ft_move_down(t_box *box)
 	if (box->map[((y + 60) + MOV) / PIX][(x + 10) / PIX] != '1'
 		&& box->map[((y + 60) + MOV) / PIX][(x + 50) / PIX] != '1')
 	{
-		ft_move_P_y(box, 1);
+		//if(box->map[((y + 55) + MOV) / PIX][(x + 25) / PIX] != 'E'
+		//	&& box->map[((y + 55) + MOV) / PIX][(x + 35) / PIX] != 'E')
+			ft_move_P_y(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
+	ft_check_finish(box, y, x);
 }
 
 void	ft_move_left(t_box *box)
@@ -155,12 +156,15 @@ void	ft_move_left(t_box *box)
 	if (box->map[(y) / PIX][((x + 10) - MOV) / PIX] != '1'
 		&& box->map[((y + 60)) / PIX][((x + 10) - MOV) / PIX] != '1')
 	{
-		ft_move_P_x(box, -1);
+		//if (box->map[(y + 10) / PIX][((x + 15) - MOV) / PIX] != 'E'
+		//&& box->map[((y + 50)) / PIX][((x + 15) - MOV) / PIX] != 'E')
+			ft_move_P_x(box, -1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
+	ft_check_finish(box, y, x);
 }
 
 void	ft_move_right(t_box *box)
@@ -174,29 +178,30 @@ void	ft_move_right(t_box *box)
 	if (box->map[(y) / PIX][((x + 50) + MOV)/ PIX] != '1'
 		&& box->map[((y + 60)) / PIX][((x + 50) + MOV) / PIX] != '1')
 	{
-		ft_move_P_x(box, 1);
+		//if (box->map[(y + 10) / PIX][((x + 40) + MOV)/ PIX] != 'E'
+		//&& box->map[((y + 50)) / PIX][((x + 40) + MOV) / PIX] != 'E')
+			ft_move_P_x(box, 1);
 	}
 	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
+	ft_check_finish(box, y, x);
 }
 
 void ft_player_direction(t_box *box, char c)
 {
 	if (c == 'R')
 	{
-		mlx_set_instance_depth(&box->Pr_img1->instances[0], 410);
-		mlx_set_instance_depth(&box->Pr_img2->instances[0], -410);
-		mlx_set_instance_depth(&box->Pl_img1->instances[0], -420);
-		mlx_set_instance_depth(&box->Pl_img2->instances[0], -430);
-		//player_animation(box, 5, 'R');
+		mlx_set_instance_depth(&box->Pr_img1->instances[0], 30);
+		
+		mlx_set_instance_depth(&box->Pl_img1->instances[0], -31);
+		
 	}
 	if (c == 'L')
 	{
-		mlx_set_instance_depth(&box->Pr_img1->instances[0], -410);
-		mlx_set_instance_depth(&box->Pr_img2->instances[0], -410);
-		mlx_set_instance_depth(&box->Pl_img1->instances[0], 420);
-		mlx_set_instance_depth(&box->Pl_img2->instances[0], -430);
+		mlx_set_instance_depth(&box->Pr_img1->instances[0], -30);
+		
+		mlx_set_instance_depth(&box->Pl_img1->instances[0], 31);
 	}
 }

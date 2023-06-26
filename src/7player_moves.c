@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/23 17:49:13 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:53:40 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct mlx_image
 	bool			enabled;	Ej: si hay 10 monedas habra 10 instancias de monedas cada una con sus ejes
 	void*			context;
 }	mlx_image_t;*/
-void key_control(t_box *box)
+void ft_key_control(t_box *box)
 {
 	if (mlx_is_key_down(box->mlx, MLX_KEY_ESCAPE))
 	{
@@ -115,7 +115,7 @@ void	ft_move_up(t_box *box)
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
-	check_finish(box, y, x);
+	ft_check_finish(box, y, x);
 }
 
 void	ft_move_down(t_box *box)
@@ -158,7 +158,7 @@ void	ft_move_left(t_box *box)
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
-	check_finish(box, y, x);
+	ft_check_finish(box, y, x);
 }
 
 void	ft_move_right(t_box *box)
@@ -180,7 +180,7 @@ void	ft_move_right(t_box *box)
 	{
 		ft_quit_col(box, y + 32, x + 32);
 	}
-	check_finish(box, y , x);
+	ft_check_finish(box, y , x);
 }
 
 void ft_player_direction(t_box *box, char c)

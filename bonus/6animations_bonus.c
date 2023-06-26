@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   6animations.c                                      :+:      :+:    :+:   */
+/*   6animations_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:41:56 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/21 12:20:58 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:46:57 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,4 @@ void	col_animation(t_box *box, int timer)
 	else if (box->C_frame == timer && box->C_img3->instances[0].z > 0)
 		box->C_frame = ft_swap_z(box->C_img3, box->C_img1, box->col);
 	box->C_frame++;
-}
-
-void	player_animation(t_box *box, int timer, char c)
-{
-	if (c == 'R')
-	{
-		if (box->P_frame == timer && box->Pr_img1->instances[0].z > 0)
-			box->P_frame = ft_swap_z(box->Pr_img1, box->Pr_img2, box->p_pos);
-		else if (box->P_frame == timer && box->Pr_img2->instances[0].z > 0)
-			box->P_frame = ft_swap_z(box->Pr_img2, box->Pr_img1, box->p_pos);
-		box->P_frame++;
-	}
 }

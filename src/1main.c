@@ -6,13 +6,13 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/23 18:16:05 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:29:28 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	free_matrix(char **matrix)
+void	ft_free_matrix(char **matrix)
 {
 	int	i;
 
@@ -25,19 +25,19 @@ void	free_matrix(char **matrix)
 	free(matrix);
 }
 
-void	free_so_long(t_box *box)
+void	ft_free_so_long(t_box *box)
 {
 	
-	free_matrix(box->map);
-	free_matrix(box->map2);
+	ft_free_matrix(box->map);
+	ft_free_matrix(box->map2);
 }
-void	moves_control(t_box *box)
+void	ft_moves_control(t_box *box)
 {
 	if (box->movs >= 64)
 	{
 		box->moves++;
 		box->movs = 0;
-		ft_printf("Movimientos:%d\n", box->moves);
+		ft_printf("Movimientos:%d\r", box->moves);
 	}
 }
 
@@ -50,8 +50,8 @@ void ft_hook(void *param)
  	t_box *box;
 
 	box = (t_box *)param;
-	key_control(box);
-	moves_control(box);
+	ft_key_control(box);
+	ft_moves_control(box);
 }
 
 void	ft_leaks(void)
@@ -62,9 +62,9 @@ void	ft_leaks(void)
 int	main(int ac, char **av)
 {
 	t_box	box;
-	if (checkin_arg(ac, av[1]))
+	if (ft_checkin_arg(ac, av[1]))
 		return (-1);
-	initbox(&box);//iniciamos los valores de la caja
+	ft_initbox(&box);//iniciamos los valores de la caja
 	ft_readsave_map(av[1], &box);//leemos el mapa y lo guardamos en la caja
 	ft_checkmap(&box);//comprobamos que el mapa sea valido
 	box.mlx = mlx_init(box.ancho * PIX, box.alto * PIX, "so_long", 0);
@@ -72,9 +72,8 @@ int	main(int ac, char **av)
 	ft_init_imgs(&box);//iniciamos la carga de imagenes
 	mlx_loop_hook(box.mlx, &ft_hook, &box);//enganchamos el bucle de la ventana
 	mlx_loop(box.mlx);//iniciamos el bucle de la ventana
-	
 	mlx_terminate(box.mlx);//cerramos la ventana
-	free_so_long(&box);//liberamos la memoria
+	ft_free_so_long(&box);//liberamos la memoria
 	atexit (ft_leaks);
 	return (0);
 }

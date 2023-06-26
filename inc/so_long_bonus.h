@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:44:18 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/21 12:20:31 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:17:07 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,32 @@
 
 typedef struct s_box
 {
-	char **map;//matriz del mapa
-	int alto;//altura del mapa
-	int ancho;//anchura del mapa
+	char 		**map;//matriz del mapa
+	char 		**map2;//copia del mapa
+	int 		alto;//altura del mapa
+	int 		ancho;//anchura del mapa
 	//contadores
-	int coins;//contador de coleccionables recogidos
-	int col;//contador de coleccionables puestos en mapa
-	int movs;//contador de movimientos
-	int exit;//contador de salidas
-	int	p_pos;//num de entradas
-	int floor;//num de floor
-	int wall;//num de wall
+	int 		coins;//contador de coleccionables recogidos
+	int 		col;//contador de coleccionables puestos en mapa
+	int 		movs;//contador de movimientos por pixel
+	int 		moves;//contador de movimientos totales
+	int 		exit;//contador de salidas
+	int			p_pos;//num de entradas
+	int 		floor;//num de floor
+	int 		wall;//num de wall
 	
 	//posicion del player
-	int	x_pos;//posicion x del player (horizontal)
-	int y_pos;//posicion y del player (vertical)
+	int			x_pos;//posicion x del player (horizontal)
+	int 		y_pos;//posicion y del player (vertical)
 
 	//frames para las animaciones
-	int F_frame;//frame del floor
-	int C_frame;//frame del collectible
-	int P_frame;//frame del player
-	int E_frame;//frame del exit
+	int 		F_frame;//frame del floor
+	int 		C_frame;//frame del collectible
+	int 		P_frame;//frame del player
+	int 		E_frame;//frame del exit
 
 	//estructuras de mlx
-	mlx_t *mlx;//estructura de mlx
+	mlx_t 		*mlx;//estructura de mlx
 	mlx_image_t *Pr_img1;//estructura de imagen del player donde guardamos la imagen renderizada
 	mlx_image_t	*Pr_img2;//derecha
 	mlx_image_t	*Pl_img1;//izquierda
@@ -72,52 +74,55 @@ typedef struct s_box
 //FUNCIONES
 //-- check_args && check map
 //checkin.c
-int	checkin_arg(int ac, char *str);
-int	ft_mtrlen(char **matriz);
-int ft_checkforma(t_box *box);
-int ft_mtrlen(char **matriz);
-void ft_checkmap(t_box *box);
+int			ft_checkin_arg(int ac, char *str);
+int			ft_mtrlen(char **matriz);
+int 		ft_checkforma(t_box *box);
+int 		ft_mtrlen(char **matriz);
+void 		ft_checkmap(t_box *box);
 //main.c
-void	ft_readsave_map(char *str, t_box *box);
-void	printmap(char **map);
+void		ft_readsave_map(char *str, t_box *box);
+void		ft_printmap(char **map);
 //load_images.c
-void	ft_load_image(t_box *box);
-void	ft_load_floor_and_wall(t_box *box);
-void	ft_load_col(t_box *box);
-void	ft_load_exit(t_box *box);
-void	ft_load_player(t_box *box);
+void		ft_load_image(t_box *box);
+void		ft_load_floor_and_wall(t_box *box);
+void		ft_load_col(t_box *box);
+void		ft_load_exit(t_box *box);
+void		ft_load_player(t_box *box);
 
 //init_images.c
-void	ft_init_imgs(t_box *box);
-void	ft_render_img(t_box *box);
-void	ft_render_floor_and_wall(t_box *box);
-void	ft_render_col(t_box *box);
-void	ft_render_exit(t_box *box);
-void	ft_render_player(t_box *box);
+void		ft_init_imgs(t_box *box);
+void		ft_render_img(t_box *box);
+void		ft_render_floor_and_wall(t_box *box);
+void		ft_render_col(t_box *box);
+void		ft_render_exit(t_box *box);
+void		ft_render_player(t_box *box);
 //load_images.c
-void	ft_load_image(t_box *box);
-void	ft_load_floor(t_box *box);
-void	ft_load_col(t_box *box);
-void ft_load_player(t_box *box);
-void	ft_load_exit(t_box *box);
+void		ft_load_image(t_box *box);
+void		ft_load_floor(t_box *box);
+void		ft_load_col(t_box *box);
+void		ft_load_player(t_box *box);
+void		ft_load_exit(t_box *box);
 
 //player_moves.c
-void key_control(t_box *box);
-void ft_move_up(t_box *box);
-void ft_move_down(t_box *box);
-void ft_move_left(t_box *box);
-void ft_move_right(t_box *box);
-void	ft_move_P_y(t_box *box, int direccion);
-void	ft_move_P_x(t_box *box, int direccion); 
+void 		key_control(t_box *box);
+void 		ft_move_up(t_box *box);
+void 		ft_move_down(t_box *box);
+void 		ft_move_left(t_box *box);
+void 		ft_move_right(t_box *box);
+void		ft_move_P_y(t_box *box, int direccion);
+void		ft_move_P_x(t_box *box, int direccion); 
 //collectable.c
-void	ft_quit_col(t_box *box, int y, int x);
+void		ft_quit_col(t_box *box, int y, int x);
 
-int	ft_swap_z(mlx_image_t *img1, mlx_image_t *img2, int total);
-void	floor_animation(t_box *box, int timer);
-void	initbox(t_box *box);
-void	ft_render_wall(t_box *box);
-void	col_animation(t_box *box, int timer);
-void	ft_open_door(t_box *box);
-void ft_player_direction(t_box *box, char c);
-void	player_animation(t_box *box, int timer, char c);
+int			ft_swap_z(mlx_image_t *img1, mlx_image_t *img2, int total);
+void		floor_animation(t_box *box, int timer);
+void		initbox(t_box *box);
+void		ft_render_wall(t_box *box);
+void		col_animation(t_box *box, int timer);
+void		ft_open_door(t_box *box);
+void 		ft_player_direction(t_box *box, char c);
+void		ft_player_animation(t_box *box, int timer, char c);
+void		ft_check_finish(t_box *box, int y, int x);
+void	ft_moves_control(t_box *box);
+void	ft_check_empty_line(char *str);
 #endif

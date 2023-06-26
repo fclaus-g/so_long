@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1main.c                                            :+:      :+:    :+:   */
+/*   1main_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/15 15:54:46 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:41:29 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ void ft_hook(void *param)
 	key_control(box);
 	floor_animation(box, 100);
 	col_animation(box, 20);
+	ft_moves_control(box);
+}
+
+void	ft_moves_control(t_box *box)
+{
+	if (box->movs >= 64)
+	{
+		box->moves++;
+		box->movs = 0;
+		ft_printf("Movimientos:%d\r", box->moves);
+	}
 }
 
 void printmap(char **map)
@@ -42,7 +53,7 @@ void printmap(char **map)
 int	main(int ac, char **av)
 {
 	t_box	box;
-	if (checkin_arg(ac, av[1]))
+	if (ft_checkin_arg(ac, av[1]))
 		return (-1);
 	initbox(&box);//iniciamos los valores de la caja
 	ft_readsave_map(av[1], &box);

@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:11:34 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/23 14:29:55 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:49:56 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ typedef struct s_box
 //FUNCIONES
 //-- check_args && check map
 //checkin.c
-int		checkin_arg(int ac, char *str);
-int		ft_mtrlen(char **matriz);
+int		ft_checkin_arg(int ac, char *str);
+int		ft_ft_mtrlen(char **matriz);
 int		ft_checkforma(t_box *box);
 int		ft_mtrlen(char **matriz);
 void	ft_checkmap(t_box *box);
 //main.c
 void	ft_readsave_map(char *str, t_box *box);
-void	printmap(char **map);
+void	ft_printmap(char **map);
 //load_images.c
 void	ft_load_image(t_box *box);
 void	ft_load_floor_and_wall(t_box *box);
@@ -94,7 +94,7 @@ void	ft_load_player(t_box *box);
 void	ft_load_exit(t_box *box);
 
 //player_moves.c
-void 	key_control(t_box *box);
+void 	ft_key_control(t_box *box);
 void 	ft_move_up(t_box *box);
 void 	ft_move_down(t_box *box);
 void 	ft_move_left(t_box *box);
@@ -105,12 +105,12 @@ void	ft_move_P_x(t_box *box, int direccion);
 void	ft_quit_col(t_box *box, int y, int x);
 
 int		ft_swap_z(mlx_image_t *img1, mlx_image_t *img2, int total);
-void	initbox(t_box *box);
+void	ft_initbox(t_box *box);
 void	ft_render_wall(t_box *box);
 void	ft_open_door(t_box *box);
 void 	ft_player_direction(t_box *box, char c);
-void	player_animation(t_box *box, int timer, char c);
-void	check_finish(t_box *box, int y, int x);
-void	moves_control(t_box *box);
-void	free_matrix(char **matrix);
+void	ft_player_animation(t_box *box, int timer, char c);
+void	ft_check_finish(t_box *box, int y, int x);
+void	ft_moves_control(t_box *box);
+void	ft_free_matrix(char **matrix);
 #endif

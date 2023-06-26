@@ -6,13 +6,13 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/23 18:16:29 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:51:18 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	check_empty_line(char *str)
+void	ft_check_empty_line(char *str)
 {
 	int	c;
 
@@ -54,7 +54,7 @@ void	ft_readsave_map(char *str, t_box *box)
 	}
 	free(line);
 	close(fd);
-	check_empty_line(map_str);
+	ft_check_empty_line(map_str);
 	free(map_str);		
 	box->map = ft_split(map_str, '\n');
 	box->map2 = ft_split(map_str, '\n');
@@ -72,7 +72,7 @@ int	ft_mtrlen(char **matriz)
 	return (i);
 }
 /* en intibox inicializamos las variables de nuestra caja de variables*/
-void	initbox(t_box *box)
+void	ft_initbox(t_box *box)
 {
 	box->map = NULL;
 	box->map2 = NULL;
@@ -101,7 +101,7 @@ void	initbox(t_box *box)
 	box->W_img = NULL;
 }
 
-void printmap(char **map)
+void ft_printmap(char **map)
 {
 	int i;
 

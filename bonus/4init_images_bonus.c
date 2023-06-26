@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4init_images.c                                     :+:      :+:    :+:   */
+/*   4init_images_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:25:31 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/15 15:06:21 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:17:59 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ el player desaparece, si lo establezco muy bajo se oculta en algunas cuadriculas
 */
 /*IMPORTANTE PARA UNA BUENA RENDERIZACION ES INTERESANTE HACER UNA
 FUNCION POR ELEMENTO PARA EVITAR ERRORES Y QUE LAS INSTANCIAS SE REFLEJEN 
-O ALMACENEN BIEN*/
+O ALMACENEN BIEN
+-----HAY CIERTA RELACION ENTRE EL TAMAÑO DEL MAPA Y EL EJE Z POR LO QUE
+SERIA MUY RECOMENDABLE A LA HORA DE ESTABLECER EL EJE Z EN LAS INSTANCIAS NO DARLE 
+MUCHA DIFERENCIA CON RESPECTO A LOS DEMAS*/
 void	ft_render_floor_and_wall(t_box *box)
 {
 	int		y;
@@ -48,8 +51,8 @@ void	ft_render_floor_and_wall(t_box *box)
 		{
 			mlx_image_to_window(box->mlx, box->F_img1, x * PIX, y * PIX);
 			mlx_image_to_window(box->mlx, box->F_img2, x * PIX, y * PIX);
-			mlx_set_instance_depth(&box->F_img1->instances[0], 10);
-			mlx_set_instance_depth(&box->F_img2->instances[0], -20);
+			mlx_set_instance_depth(&box->F_img1->instances[box->floor], 1);
+			mlx_set_instance_depth(&box->F_img2->instances[box->floor], -2);
 			box->floor++;
 			x++;	
 		}
@@ -70,7 +73,7 @@ void	ft_render_wall(t_box *box)
 			if (box->map[y][x] == '1')
 			{
 				mlx_image_to_window(box->mlx, box->W_img, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->W_img->instances[0], 300);
+				mlx_set_instance_depth(&box->W_img->instances[box->wall], 5);
 				box->wall++;
 			}
 			x++;
@@ -95,9 +98,9 @@ void	ft_render_col(t_box *box)
 				mlx_image_to_window(box->mlx, box->C_img1, x * PIX, y * PIX);
 				mlx_image_to_window(box->mlx, box->C_img2, x * PIX, y * PIX);
 				mlx_image_to_window(box->mlx, box->C_img3, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->C_img1->instances[0], 210);
-				mlx_set_instance_depth(&box->C_img2->instances[0], -220);
-				mlx_set_instance_depth(&box->C_img3->instances[0], -230);
+				mlx_set_instance_depth(&box->C_img1->instances[0], 10);
+				mlx_set_instance_depth(&box->C_img2->instances[0], -11);
+				mlx_set_instance_depth(&box->C_img3->instances[0], -12);
 				box->coins++;
 			}
 			x++;
@@ -121,13 +124,9 @@ void	ft_render_exit(t_box *box)
 			if (box->map[y][x] == 'E')
 			{
 				mlx_image_to_window(box->mlx, box->E_img1, x * PIX, y * PIX);
-				mlx_image_to_window(box->mlx, box->E_img2, x * PIX, y * PIX);
-				mlx_image_to_window(box->mlx, box->E_img3, x * PIX, y * PIX);
 				mlx_image_to_window(box->mlx, box->E_img4, x * PIX, y * PIX);
-				mlx_set_instance_depth(&box->E_img1->instances[0], 310);
-				mlx_set_instance_depth(&box->E_img2->instances[0], -320);
-				mlx_set_instance_depth(&box->E_img3->instances[0], -330);
-				mlx_set_instance_depth(&box->E_img4->instances[0], -340);
+				mlx_set_instance_depth(&box->E_img1->instances[0], 20);
+				mlx_set_instance_depth(&box->E_img4->instances[0], -23);
 			}
 			x++;
 		}
@@ -155,13 +154,9 @@ void	ft_render_player(t_box *box)
 				box->x_pos = x;
 				box->y_pos = y;
 				mlx_image_to_window(box->mlx, box->Pr_img1, box->x_pos * PIX, box->y_pos * PIX);
-				mlx_image_to_window(box->mlx, box->Pr_img2, box->x_pos * PIX, box->y_pos * PIX);
 				mlx_image_to_window(box->mlx, box->Pl_img1, box->x_pos * PIX, box->y_pos * PIX);
-				mlx_image_to_window(box->mlx, box->Pl_img2, box->x_pos * PIX, box->y_pos * PIX);
-				mlx_set_instance_depth(&box->Pr_img1->instances[0], 510);
-				mlx_set_instance_depth(&box->Pr_img2->instances[0], -520);
-				mlx_set_instance_depth(&box->Pl_img1->instances[0], -530);
-				mlx_set_instance_depth(&box->Pl_img2->instances[0], -540);
+				mlx_set_instance_depth(&box->Pr_img1->instances[0], 30);
+				mlx_set_instance_depth(&box->Pl_img1->instances[0], -31);
 			}
 			x++;
 		}

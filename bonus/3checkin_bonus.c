@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3checkin.c                                         :+:      :+:    :+:   */
+/*   3checkin_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:36:46 by fernandocla       #+#    #+#             */
-/*   Updated: 2023/06/21 12:20:52 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:26:36 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_check_elements(t_box *box)
 }
 /*en esta funcion comprobamos que hay 2 argumentos y que el nombre
 del archivo es un .ber si retorna 1 el programa finalizara en el main*/
-int	checkin_arg(int ac, char *str)
+int	ft_checkin_arg(int ac, char *str)
 {
 	if (ac != 2)
 	{
