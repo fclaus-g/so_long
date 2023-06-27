@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 10:51:18 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:08:58 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_readsave_map(char *str, t_box *box)
 	line = get_next_line(fd);//leemos la primera linea
 	if (!line)
 	{
-		ft_putstr_fd("Error mapa vacio", 1);
+		ft_putstr_fd("Error, mapa vacio", 1);
 		exit (1);
 	}	
 	while (line)
@@ -54,10 +54,10 @@ void	ft_readsave_map(char *str, t_box *box)
 	}
 	free(line);
 	close(fd);
-	ft_check_empty_line(map_str);
-	free(map_str);		
+	ft_check_empty_line(map_str);	
 	box->map = ft_split(map_str, '\n');
 	box->map2 = ft_split(map_str, '\n');
+	free(map_str);
 }
 
 int	ft_mtrlen(char **matriz)

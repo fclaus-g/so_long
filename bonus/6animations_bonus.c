@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:41:56 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 16:46:57 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:06:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ void	col_animation(t_box *box, int timer)
 	else if (box->C_frame == timer && box->C_img3->instances[0].z > 0)
 		box->C_frame = ft_swap_z(box->C_img3, box->C_img1, box->col);
 	box->C_frame++;
+}
+
+void	enemy_animation(t_box *box, int timer)
+{
+	if (box->trap_frame == timer && box->trap->instances[0].z > 0)
+		box->trap_frame = ft_swap_z(box->trap, box->trap2, box->enemys);
+	else if (box->trap_frame == timer && box->trap2->instances[0].z > 0)
+		box->trap_frame = ft_swap_z(box->trap2, box->trap, box->enemys);
+	box->trap_frame++;
 }

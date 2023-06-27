@@ -6,31 +6,12 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 17:29:28 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:44:32 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	ft_free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i] != NULL)
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
-
-void	ft_free_so_long(t_box *box)
-{
-	
-	ft_free_matrix(box->map);
-	ft_free_matrix(box->map2);
-}
 void	ft_moves_control(t_box *box)
 {
 	if (box->movs >= 64)
@@ -62,6 +43,7 @@ void	ft_leaks(void)
 int	main(int ac, char **av)
 {
 	t_box	box;
+	atexit (ft_leaks);
 	if (ft_checkin_arg(ac, av[1]))
 		return (-1);
 	ft_initbox(&box);//iniciamos los valores de la caja
@@ -74,7 +56,6 @@ int	main(int ac, char **av)
 	mlx_loop(box.mlx);//iniciamos el bucle de la ventana
 	mlx_terminate(box.mlx);//cerramos la ventana
 	ft_free_so_long(&box);//liberamos la memoria
-	atexit (ft_leaks);
 	return (0);
 }
 /*

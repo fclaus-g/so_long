@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4init_images_bonus.c                               :+:      :+:    :+:   */
+/*   5init_images_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:25:31 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 17:17:59 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:07:11 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ O ALMACENEN BIEN
 -----HAY CIERTA RELACION ENTRE EL TAMAÑO DEL MAPA Y EL EJE Z POR LO QUE
 SERIA MUY RECOMENDABLE A LA HORA DE ESTABLECER EL EJE Z EN LAS INSTANCIAS NO DARLE 
 MUCHA DIFERENCIA CON RESPECTO A LOS DEMAS*/
-void	ft_render_floor_and_wall(t_box *box)
+void	ft_render_floor(t_box *box)
 {
 	int		y;
 	int		x;
@@ -108,7 +108,6 @@ void	ft_render_col(t_box *box)
 		y++;
 	}
 	box->col = box->coins;
-	printf("coins: %d\n", box->coins);
 }
 void	ft_render_exit(t_box *box)
 {

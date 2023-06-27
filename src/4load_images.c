@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:48:17 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/21 18:47:44 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:45:26 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ MLX_TEXTURE_TO_IMAGE tras esto vaciaremos aux para usarla de nuevo*/
 
 void	ft_load_images(t_box *box)
 {
-	ft_load_floor(box);
+	ft_load_floor_and_wall(box);
 	ft_load_col(box);
 	ft_load_player(box);
 	ft_load_exit(box);
 	
 }
 
-void	ft_load_floor(t_box *box)
+void	ft_load_floor_and_wall(t_box *box)
 {
 	mlx_texture_t	*aux;
 

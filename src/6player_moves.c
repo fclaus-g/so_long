@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   7player_moves.c                                    :+:      :+:    :+:   */
+/*   6player_moves.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 18:00:39 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 10:53:40 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:58:24 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,126 +61,20 @@ void ft_key_control(t_box *box)
 	if (mlx_is_key_down(box->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(box->mlx);
+		exit (0);
 	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_W) ||
 		mlx_is_key_down(box->mlx, MLX_KEY_UP))
-	{
 		ft_move_up(box);
-		box->y_pos--;
-	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_S)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_DOWN))
-	{
 		ft_move_down(box);
-		box->y_pos++;
-	}
 	if (mlx_is_key_down(box->mlx, MLX_KEY_A)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_LEFT))
-	{
 		ft_move_left(box);
-		box->x_pos--;
-	}
-	
 	if (mlx_is_key_down(box->mlx, MLX_KEY_D)
 		|| mlx_is_key_down(box->mlx, MLX_KEY_RIGHT))
-	{
 		ft_move_right(box);
-		box->x_pos++;
-	}
-	
-	
-}
-/*Para mover al personaje hay que tener en cuenta que esta en una cuadricula 
-referenciada por la esquina superior derecha por lo que, para evitar que se
-meta en los muros tenemos que controlar las esquinas derechas (arriba y abajo)
-situando el punto de referencia en ese lugar por ej mover hacia la derecha
-seria: if ( box->map[(y + 60) + MOV / PIX][(x + 60) + MOV / PIX]) esta linea 
-de codigo hace referencia a la esquina inferior derecha ademas el movimiento lo
-hacemos usando la instancia dentro de la struct img*/
-void	ft_move_up(t_box *box)
-{
-	int y;
-	int x;
-
-	x = box->Pr_img1->instances[0].x;
-	y = box->Pr_img1->instances[0].y;
-	if ((box->map[(y - MOV) / PIX][(x + 10)/ PIX] != '1' 
-		&& box->map[(y - MOV) / PIX][(x + 50) / PIX] != '1'))
-	{
-		if (box->map[(y + 15 - MOV) / PIX][(x + 20)/ PIX] != 'E' 
-			&& box->map[(y + 15 - MOV) / PIX][(x + 40) / PIX] != 'E')
-			ft_move_P_y(box, -1);
-	}
-	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{
-		ft_quit_col(box, y + 32, x + 32);
-	}
-	ft_check_finish(box, y, x);
-}
-
-void	ft_move_down(t_box *box)
-{
-	int y;
-	int x;
-
-	x = box->Pr_img1->instances[0].x;
-	y = box->Pr_img1->instances[0].y;
-	if (box->map[((y + 60) + MOV) / PIX][(x + 10) / PIX] != '1'
-		&& box->map[((y + 60) + MOV) / PIX][(x + 50) / PIX] != '1')
-	{
-		if(box->map[((y + 55) + MOV) / PIX][(x + 25) / PIX] != 'E'
-			&& box->map[((y + 55) + MOV) / PIX][(x + 35) / PIX] != 'E')
-			ft_move_P_y(box, 1);
-	}
-	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{
-		ft_quit_col(box, y + 32, x + 32);
-		
-	}
-}
-
-void	ft_move_left(t_box *box)
-{
-	int y;
-	int x;
-
-	x = box->Pr_img1->instances[0].x;
-	y = box->Pr_img1->instances[0].y;
-	ft_player_direction(box, 'L');
-	if (box->map[(y) / PIX][((x + 10) - MOV) / PIX] != '1'
-		&& box->map[((y + 60)) / PIX][((x + 10) - MOV) / PIX] != '1')
-	{
-		if (box->map[(y + 10) / PIX][((x + 15) - MOV) / PIX] != 'E'
-		&& box->map[((y + 50)) / PIX][((x + 15) - MOV) / PIX] != 'E')
-		ft_move_P_x(box, -1);
-	}
-	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{
-		ft_quit_col(box, y + 32, x + 32);
-	}
-	ft_check_finish(box, y, x);
-}
-
-void	ft_move_right(t_box *box)
-{
-	int y;
-	int x;
-
-	x = box->Pr_img1->instances[0].x;
-	y = box->Pr_img1->instances[0].y;
-	ft_player_direction(box, 'R');
-	if (box->map[(y) / PIX][((x + 50) + MOV)/ PIX] != '1'
-		&& box->map[((y + 60)) / PIX][((x + 50) + MOV) / PIX] != '1')
-	{
-		if (box->map[(y + 10) / PIX][((x + 40) + MOV)/ PIX] != 'E'
-		&& box->map[((y + 50)) / PIX][((x + 40) + MOV) / PIX] != 'E')
-		ft_move_P_x(box, 1);
-	}
-	if (box->map[(y + 32) / PIX][(x + 32) / PIX] == 'C')
-	{
-		ft_quit_col(box, y + 32, x + 32);
-	}
-	ft_check_finish(box, y , x);
 }
 
 void ft_player_direction(t_box *box, char c)

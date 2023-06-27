@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   5load_images_bonus.c                               :+:      :+:    :+:   */
+/*   4load_images_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:48:17 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 12:55:14 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:14:54 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_load_image(t_box *box)
 	ft_load_col(box);
 	ft_load_player(box);
 	ft_load_exit(box);
-	
+	if (box->enem > 0)
+		ft_load_enemy(box);
 }
 
 void	ft_load_floor(t_box *box)
@@ -57,12 +58,6 @@ void	ft_load_col(t_box *box)
 	aux = mlx_load_png("sprites/col3.png");
 	box->C_img3 = mlx_texture_to_image(box->mlx, aux);
 	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/col4.png");
-	box->C_img4 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/col5.png");
-	box->C_img5 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
 }
 void ft_load_player(t_box *box)
 {
@@ -72,14 +67,8 @@ void ft_load_player(t_box *box)
 	aux = mlx_load_png("sprites/Reap1.png");
 	box->Pr_img1 = mlx_texture_to_image(box->mlx, aux);
 	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/Reap2.png");
-	box->Pr_img2 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
 	aux = mlx_load_png("sprites/Reapl1.png");
 	box->Pl_img1 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/Reapl2.png");
-	box->Pl_img2 = mlx_texture_to_image(box->mlx, aux);
 	mlx_delete_texture(aux);
 }
 
@@ -90,12 +79,6 @@ void	ft_load_exit(t_box *box)
 	aux = malloc(sizeof(mlx_texture_t));
 	aux = mlx_load_png("sprites/exit1.png");
 	box->E_img1 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/exit2.png");
-	box->E_img2 = mlx_texture_to_image(box->mlx, aux);
-	mlx_delete_texture(aux);
-	aux = mlx_load_png("sprites/exit3.png");
-	box->E_img3 = mlx_texture_to_image(box->mlx, aux);
 	mlx_delete_texture(aux);
 	aux = mlx_load_png("sprites/exit4.png");
 	box->E_img4 = mlx_texture_to_image(box->mlx, aux);

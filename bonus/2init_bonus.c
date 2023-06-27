@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:55:32 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 17:16:24 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:28:58 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_readsave_map(char *str, t_box *box)
 	line = get_next_line(fd);//leemos la primera linea
 	if (!line)
 	{
-		ft_putstr_fd("Error mapa vacio", 1);
+		ft_putstr_fd(RED"Error, mapa vacio\n"RESET, 2);
 		exit (1);
 	}	
 	while (line)
@@ -42,13 +42,13 @@ void	ft_readsave_map(char *str, t_box *box)
 	box->map = ft_split(map_str, '\n');
 	box->map2 = ft_split(map_str, '\n');
 	free(map_str);
-	//printmap(box->map);
 }
 /* en intibox inicializamos las variables de nuestra caja de variables*/
-void	initbox(t_box *box)
+void	ft_initbox(t_box *box)
 {
 	box->map = NULL;
 	box->map2 = NULL;
+	box->banner_moves = NULL;
 	box->ancho = 0;
 	box->alto = 0;
 	box->coins = 0;
@@ -63,8 +63,12 @@ void	initbox(t_box *box)
 	box->wall = 0;
 	box->F_frame = 0;
 	box->C_frame = 0;
-	box->E_frame = 0;
-	box->P_frame = 0;
+	box->trap_frame = 0;
+	box->enemys = 0;
+	box->enem = 0;
+}
+void	ft_initboxstruct(t_box *box)
+{
 	box->mlx = NULL;
 	box->F_img1 = NULL;
 	box->F_img2 = NULL;
@@ -76,16 +80,24 @@ void	initbox(t_box *box)
 	box->Pr_img1 = NULL;
 	box->Pl_img1 = NULL;
 	box->W_img = NULL;
+	box->banner = NULL;
+	box->movement = NULL;
+	box->trap = NULL;
+	box->trap2 = NULL;
 }
 /*en ft_init_images */
 void	ft_init_imgs(t_box *box)
 {
 	ft_load_image(box);
-	ft_render_floor_and_wall(box);
+	ft_render_floor(box);
 	ft_render_wall(box);
 	ft_render_col(box);
 	ft_render_exit(box);
 	ft_render_player(box);
+	if (box->enem > 0)
+		ft_render_enemy(box);
+	box->banner = mlx_put_string(box->mlx, "Movimientos", 32, 15);
+	//box->movement = mlx_put_string(box->mlx, ft_itoa(box->moves), 200, 15);
 }
 void	ft_check_empty_line(char *str)
 {
@@ -96,7 +108,7 @@ void	ft_check_empty_line(char *str)
 	{
 		if(str[c] == '\n' && str[c + 1] == '\n')
 		{
-			ft_printf("Error, parece que una linea esta vacía");
+			ft_putstr_fd(RED"Error, parece que una linea esta vacía\n"RESET, 2);
 			exit (1);
 		}	
 		c++;

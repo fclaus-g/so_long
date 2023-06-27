@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:21:51 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 16:41:29 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:32:26 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void ft_hook(void *param)
 	box = (t_box *)param;
 	key_control(box);
 	floor_animation(box, 100);
+	if(box->enem > 0)
+		enemy_animation(box, 20);
 	col_animation(box, 20);
 	ft_moves_control(box);
 }
@@ -33,7 +35,12 @@ void	ft_moves_control(t_box *box)
 	{
 		box->moves++;
 		box->movs = 0;
-		ft_printf("Movimientos:%d\r", box->moves);
+		if (box->banner_moves != NULL)
+			free(box->banner_moves);
+		box->banner_moves = (ft_itoa(box->moves)); 
+		mlx_delete_image(box->mlx, box->movement);
+		box->movement = mlx_put_string(box->mlx, box->banner_moves, 200, 15);
+		ft_printf(YELLOW"Movimientos:%d\r"RESET, box->moves);
 	}
 }
 
@@ -49,13 +56,15 @@ void printmap(char **map)
 	}
 	write (1,"\n", 1);
 }
-
 int	main(int ac, char **av)
 {
 	t_box	box;
+	
 	if (ft_checkin_arg(ac, av[1]))
 		return (-1);
-	initbox(&box);//iniciamos los valores de la caja
+	atexit(ft_leaks);
+	ft_initbox(&box);//iniciamos los valores de la caja
+	ft_initboxstruct(&box);
 	ft_readsave_map(av[1], &box);
 	ft_checkmap(&box);
 	box.mlx = mlx_init(box.ancho * PIX, box.alto * PIX, "so_long", 0);
@@ -63,6 +72,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(box.mlx, &ft_hook, &box);//enganchamos el bucle de la ventana
 	mlx_loop(box.mlx);//iniciamos el bucle de la ventana
 	mlx_terminate(box.mlx);//cerramos la ventana
+	ft_free_so_long(&box);
 	return (0);
 }
 /*

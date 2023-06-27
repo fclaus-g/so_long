@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   8collectable_bonus.c                               :+:      :+:    :+:   */
+/*   8coll_and_enemy_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:05:42 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/06/26 17:09:53 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:07:43 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_quit_col(t_box *box, int y, int x)
 			box->C_img2->instances[i].enabled = false;
 			box->C_img3->instances[i].enabled = false;
 			box->coins--;
-			//ft_printf("coins: %d\n", box->coins);
 			return ;
 		}
 		i++;
@@ -42,5 +41,41 @@ void	ft_open_door(t_box *box)
 	{
 		mlx_set_instance_depth(&box->E_img1->instances[0], -15);
 		mlx_set_instance_depth(&box->E_img4->instances[0], 16);
+	}
+}
+void	ft_load_enemy(t_box *box)
+{
+	mlx_texture_t	*aux;
+
+	aux = malloc(sizeof(mlx_texture_t));
+	aux = mlx_load_png("sprites/enemy1.png");
+	box->trap = mlx_texture_to_image(box->mlx, aux);
+	mlx_delete_texture(aux);
+	aux = mlx_load_png("sprites/enemy2.png");
+	box->trap2 = mlx_texture_to_image(box->mlx, aux);
+	mlx_delete_texture(aux);
+}
+void	ft_render_enemy(t_box *box)
+{
+	int	x;
+	int	y;
+	
+	y = 0;
+	while (box->map[y])
+	{
+		x = 0;
+		while (box->map[y][x])
+		{
+			if (box->map[y][x] == 'X')
+			{
+				box->enemys++;
+				mlx_image_to_window(box->mlx, box->trap, x * PIX, y * PIX);
+				mlx_image_to_window(box->mlx, box->trap2, x * PIX, y * PIX);
+				mlx_set_instance_depth(&box->trap->instances[0], 28);
+				mlx_set_instance_depth(&box->trap2->instances[0], -29);
+			}
+			x++;
+		}
+		y++;
 	}
 }
