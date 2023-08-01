@@ -6,7 +6,7 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 11:13:04 by fclaus-g          #+#    #+#              #
-#    Updated: 2023/06/27 16:44:26 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/07/01 19:54:53 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,14 @@ BONUSOBJ = ${BONUSSRC:.c=.o}
 all: libmlx libft libgnl libpf $(NAME)
 
 #COMPILACION EN CASA
-#libmlx:
-#	@echo "\n$(AMARILLO) **** Compilando MLX42 **** $(DEF_COLOR)\n"
-#	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
-#	@echo "\n$(VERDE) **** MLX42 compilada **** $(DEF_COLOR)\n"
+libmlx:
+	@echo "\n$(AMARILLO) **** Compilando MLX42 **** $(DEF_COLOR)\n"
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
+	@echo "\n$(VERDE) **** MLX42 compilada **** $(DEF_COLOR)\n"
 
 #COMPILACION EN 42
-libmlx :
-	@make -C ${LIBMLX}
+#libmlx :
+#	@make -C ${LIBMLX}
 
 libft  :
 	@echo "\n$(AMARILLO) **** Compilando LIBFT **** $(DEF_COLOR)\n"
@@ -64,29 +64,29 @@ libpf :
 
 
 #COMPILACION EN CASA
-#$(NAME): $(OBJS)
-#	@echo "\n$(AMARILLO) **** Compilando SO_LONG **** $(DEF_COLOR)\n"
-#	@$(CC) $(OBJS) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o $(NAME)
-#	@echo "\n$(VERDE) **** SO_LONG compilado **** $(DEF_COLOR)\n"
+$(NAME): $(OBJS)
+	@echo "\n$(AMARILLO) **** Compilando SO_LONG **** $(DEF_COLOR)\n"
+	@$(CC) $(OBJS) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o $(NAME)
+	@echo "\n$(VERDE) **** SO_LONG compilado **** $(DEF_COLOR)\n"
 
 #COMPILACION EN 42
-$(NAME) : $(OBJS)
-	@echo "\n$(AMARILLO) **** Compilando SO_LONG **** $(DEF_COLOR)\n"
-	${CC} $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o $(NAME)
-	@echo "\n$(VERDE) **** SO_LONG compilado **** $(DEF_COLOR)\n"
+#$(NAME) : $(OBJS)
+#	@echo "\n$(AMARILLO) **** Compilando SO_LONG **** $(DEF_COLOR)\n"
+#	${CC} $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o $(NAME)
+#	@echo "\n$(VERDE) **** SO_LONG compilado **** $(DEF_COLOR)\n"
 
 #$(OBJ) : $(SRC)
 #	$(CC) $(CFLAGS) $(SRC)
 
 #COMPILACION BONUS EN CASA
-#bonus : libmlx libft libgnl libpf $(BONUSOBJ)
-#	@echo "\n$(AMARILLO) **** Compilando SO_LONG_BONUS **** $(DEF_COLOR)\n"
-#	@$(CC) $(CFLAGS) $(BONUSOBJ) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o so_long_bonus
-#	@echo "\n$(VERDE) **** SO_LONG_BONUS compilado **** $(DEF_COLOR)\n"
+bonus : libmlx libft libgnl libpf $(BONUSOBJ)
+	@echo "\n$(AMARILLO) **** Compilando SO_LONG_BONUS **** $(DEF_COLOR)\n"
+	@$(CC) $(CFLAGS) $(BONUSOBJ) $(LIBS) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(HEADERS) -o so_long_bonus
+	@echo "\n$(VERDE) **** SO_LONG_BONUS compilado **** $(DEF_COLOR)\n"
 
 #COMPILACION BONUS EN 42
-bonus : $(BONUSOBJ)
-	${CC} $(CFLAGS) $(BONUSOBJ) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o so_long_bonus
+#bonus : $(BONUSOBJ)
+#	${CC} $(CFLAGS) $(BONUSOBJ) $(LIBFT)/libft.a $(LIBPF)/libftprintf.a $(LIBGNL)/get_next_line.a $(LIBS42) -o so_long_bonus
 
 %.o: bonus/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<\n)"

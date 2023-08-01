@@ -1,7 +1,7 @@
 Makefile
 *.o
 MLX42
-lib
+lib/
 .DS_Store
 *.a
 a.out
