@@ -1,5 +1,5 @@
 # so_long - 42 Project
-
+![so_long]((img/so_long.gif))
 ## Introduction
 
 **so_long** is a project at 42 that involves creating a simple 2D game where the player navigates through a grid-based map, collecting items and reaching an exit. The goal is to develop a game using basic graphical and game programming techniques, including handling user input, rendering graphics, and managing game state.
